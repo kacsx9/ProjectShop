@@ -18,8 +18,16 @@ namespace ProjektSklep.Controllers
             _logger = logger;
         }
 
+        //ostateczna metoda Index()
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        //mockupowa metoda
         public IActionResult Index()
         {
+
             return View();
         }
 
