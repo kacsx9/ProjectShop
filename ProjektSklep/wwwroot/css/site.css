@@ -85,3 +85,8 @@ body {
     pointer-events: none;
     color: #aaa;
 }
+
+.nav-sidebar {
+    max-height: 150px;
+    overflow-y: scroll;
+}

@@ -11,7 +11,7 @@
     <div class="page-header">
         <nav class="navbar navbar-light bg-light">
             <div class="float_left">
-                <a href="/Home/Index"><fieldset style="border: 2px solid; padding: 3"> <h2> LOGO </h2> </fieldset></a>
+                <a href="/Home/Index"><fieldset style="border: 2px solid; padding: 3px"> <h2> LOGO </h2> </fieldset></a>
             </div>
 
             <div class="container">
@@ -31,18 +31,33 @@
                 <button class="btn btn-secondary" type="button"> Zaloguj się </button>
             </nav>
         </nav>
-</div>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
     </div>
+    <div class="container-fluid">
+        <div class="row" >
+            <nav id="nav-sidebar" class="bg-faded" >
+                <div class="sidebar-header hidden-sm-down">
+                    <h2>Kategorie</h2>
+                    <hr />
+                </div>
+                <div class="sidebar-content hidden-sm-down">
+                    <ul class="nav nav-pills flex-column">
+                        @RenderSection("Categories", required: true);
+                     </ul>
+                </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - ProjektSklep - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </nav>
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
         </div>
-    </footer>
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2020 - ProjektSklep - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
