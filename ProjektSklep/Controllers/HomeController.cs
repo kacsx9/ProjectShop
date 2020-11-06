@@ -27,7 +27,28 @@ namespace ProjektSklep.Controllers
         //mockupowa metoda
         public IActionResult Index()
         {
-            List<Product> produkty = new List<Product>();
+            ViewBag.produkty = new List<Product>();
+            Product p = new Product();
+            p.Name = "Samochód";
+            ViewBag.produkty.Add(p);
+            Product p1 = new Product();
+            p1.Name = "Samochód1";
+            ViewBag.produkty.Add(p1);
+            Product p2 = new Product();
+            p2.Name = "Samochód2";
+            ViewBag.produkty.Add(p2);
+
+            ViewBag.kategorie = new List<Category>();
+            Category c = new Category();
+            c.Name = "Komputery";
+            Category c1 = new Category();
+            c1.Name = "Samochody";
+            Category c2 = new Category();
+            c2.Name = "Ludzie";
+
+            ViewBag.kategorie.Add(c);
+            ViewBag.kategorie.Add(c1);
+            ViewBag.kategorie.Add(c2);
 
             return View();
         }

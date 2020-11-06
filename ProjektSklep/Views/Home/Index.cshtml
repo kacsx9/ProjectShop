@@ -3,20 +3,22 @@
 }
 
 <div class="text-center">
-    
+    <ul>
+        @foreach (Product p in ViewBag.produkty)
+        {
+            <li>@p.Name</li>
+        }
+    </ul>
 </div>
 
 
-@section Categories{ 
-    <li class="nav-item">
-        <a class="nav-link" href="#">Overview </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Overview </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Overview </a>
-    </li>
+@section Categories{
+    @foreach (Category c in ViewBag.kategorie)
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="#">@c.Name </a>
+        </li>
+    }
 }
 
 
