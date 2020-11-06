@@ -8,27 +8,30 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="page-header">
+        <nav class="navbar navbar-light bg-light">
+            <div class="float_left">
+                <a href="/Home/Index"><fieldset style="border: 2px solid; padding: 3"> <h2> LOGO </h2> </fieldset></a>
+            </div>
+
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProjektSklep</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                <div class="input-group md-form form-sm form-2 pl-0">
+                    <input class="form-control my-0 py-1 red-border" type="text" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button">
+                            <i class="fa fa-search">Szukaj</i>
+                        </button>
+                    </div>
                 </div>
             </div>
+            <nav class="navbar navbar-light bg-light">
+                <button class="btn btn-secondary" type="button"> Ustawienia </button>
+            </nav>
+            <nav class="navbar navbar-light bg-light">
+                <button class="btn btn-secondary" type="button"> Zaloguj się </button>
+            </nav>
         </nav>
-    </header>
+</div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

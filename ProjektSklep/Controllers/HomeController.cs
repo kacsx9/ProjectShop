@@ -27,6 +27,7 @@ namespace ProjektSklep.Controllers
         //mockupowa metoda
         public IActionResult Index()
         {
+            List<Product> produkty = new List<Product>();
 
             return View();
         }
