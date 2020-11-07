@@ -1,24 +1,37 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Strona główna";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <ul>
+    <div class="list-group">
         @foreach (Product p in ViewBag.produkty)
         {
-            <li>@p.Name</li>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div>OBRAZEK</div>
+            <div style="float:right; width:80%;">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@p.Name</h5>
+                    <small>@p.Price PLN</small>
+                </div>
+                <p class="mb-1">Przykładowy krótki opis produktu lub jakieś inne pierdoły, które będą dodane z bazy danych.</p>
+                <small>Kategoria / Autor wpisu</small>
+            </div>
+            <div style="clear:both; font-size:1px;"></div>
+        </a>
         }
-    </ul>
-</div>
+    </div>
+
 
 
 @section Categories{
-    @foreach (Category c in ViewBag.kategorie)
-    {
-        <li class="nav-item">
-            <a class="nav-link" href="#">@c.Name </a>
-        </li>
-    }
+    
+        @foreach (Category c in ViewBag.kategorie)
+        {
+            <button type="button" class="list-group-item list-group-item-action" id="category">@c.Name</button>
+        }
+    
 }
 
 
