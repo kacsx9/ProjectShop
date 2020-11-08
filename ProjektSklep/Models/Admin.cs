@@ -7,6 +7,7 @@ namespace ProjektSklep.Models
 {
     public class Admin : Customer
     {
+        /* METODY */
         public bool AddProduct(Product p)
         {
             return true;

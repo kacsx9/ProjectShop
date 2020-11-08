@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,15 +15,21 @@ namespace ProjektSklep.Models
 
     public class Order
     {
-        //pola
+        /* POLA */
+        [Key]
         public int OrderID { get; set; }
         public int CustomerID { get; set; }
-        public List<Product> OrderList { get; set; }
         public int ShippingMethodID { get; set; }
-        public int PaymentMethod { get; set; }
+        public int PaymentMethodID { get; set; }
         public State OrderStatus { get; set; }
 
-        //metody
+        /* POLA - ENTITY FRAMEWORK */
+        public Customer Customer { get; set; }
+        public ICollection<Product> Products { get; set; }
+        public ShippingMethod ShippingMethod { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
+
+        /* METODY */
         public bool SendOrderStatement()
         {
             return true;

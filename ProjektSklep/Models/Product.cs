@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,13 +8,15 @@ namespace ProjektSklep.Models
 {
     public class Product
     {
-        //pola
+        /* POLA */
+        [Key]
         public int ProductID { get; set; }
         public string Name { get; set; }
         public int CategoryID { get; set; }
         public string ProductDescription { get; set; }
         public string Image { get; set; }
-        public List<int> AttachmentList { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateAdded { get; set; }         //format daty ewentualnie do zmiany
         public bool Promotion { get; set; }
         public int VAT { get; set; }
@@ -23,8 +26,14 @@ namespace ProjektSklep.Models
         public int SoldProducts { get; set; }
         public int ExpertID { get; set; }
 
-        //metody
-        public bool GenerateHTML()  //nieskonczone
+        /* POLA - ENTITY FRAMEWORK */
+        public Category Category { get; set; }
+        public ICollection<Attachment> Attachments { get; set; }
+        public Expert Expert { get; set; }
+        public Order Order { get; set; }
+
+        /* METODY */
+        public bool GenerateHTML()
         {
             return true;
         }
