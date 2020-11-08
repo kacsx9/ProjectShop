@@ -14,15 +14,20 @@ namespace ProjektSklep.Models
 
     public class Order
     {
-        //pola
+        /* POLA */
         public int OrderID { get; set; }
         public int CustomerID { get; set; }
-        public List<Product> OrderList { get; set; }
-        public int ShippingMethodID { get; set; }
-        public int PaymentMethod { get; set; }
+        public int ShippingMethodId { get; set; }
+        public int PaymentMethodId { get; set; }
         public State OrderStatus { get; set; }
 
-        //metody
+        /* POLA - ENTITY FRAMEWORK */
+        public Customer Customer { get; set; }
+        public ICollection<Product> Products { get; set; }
+        public ShippingMethod ShippingMethod { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
+
+        /* METODY */
         public bool SendOrderStatement()
         {
             return true;

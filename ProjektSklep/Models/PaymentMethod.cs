@@ -7,8 +7,11 @@ namespace ProjektSklep.Models
 {
     public class PaymentMethod
     {
+        /* POLA */
         public int PaymentMethodId { get; set; }
-
         public string Name { get; set; }
+
+        /* POLA - ENTITY FRAMEWORK */
+        public Order Order { get; set; }
     }
 }

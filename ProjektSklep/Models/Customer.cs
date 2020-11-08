@@ -7,6 +7,7 @@ namespace ProjektSklep.Models
 {
     public class Customer
     {
+        /* POLA */
         public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -14,10 +15,15 @@ namespace ProjektSklep.Models
         public string Password { get; set; }
         public string Email { get; set; }
         public int AddressId { get; set; }
-        public List<int> OrderList { get; set; } //List<OrderId>
-        public int ConfigurationId { get; set; }
+        public int PageConfigurationId { get; set; }
         public bool AdminRights { get; set; }
 
+        /* POLA - ENTITY FRAMEWORK */
+        public Address Address { get; set; }
+        public PageConfiguration PageConfiguration { get; set; }
+        public ICollection<Order> Orders { get; set; }
+
+        /* METODY */
         public bool GenerateNewPassword()
         {
             return true;

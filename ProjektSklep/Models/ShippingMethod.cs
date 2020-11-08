@@ -7,8 +7,11 @@ namespace ProjektSklep.Models
 {
     public class ShippingMethod
     {
+        /* POLA */
         public int ShippingMethodId { get; set; }
-
         public string Name { get; set; }
+
+        /* POLA - ENTITY FRAMEWORK */
+        public Order Order { get; set; }
     }
 }

@@ -7,6 +7,7 @@ namespace ProjektSklep.Models
 {
     public class PageConfiguration
     {
+        /* POLA */
         public int PageConfigurationId { get; set; }
         public bool SendingNewsletter { get; set; }
         public bool ShowNetPrices { get; set; }
@@ -14,5 +15,8 @@ namespace ProjektSklep.Models
         public int InterfaceSkin { get; set; }
         public int Language { get; set; }
         public int Currency { get; set; }
+
+        /* POLA - ENTITY FRAMEWORK */
+        public Customer Customer { get; set; }
     }
 }

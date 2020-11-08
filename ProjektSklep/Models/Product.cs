@@ -7,13 +7,12 @@ namespace ProjektSklep.Models
 {
     public class Product
     {
-        //pola
+        /* POLA */
         public int ProductID { get; set; }
         public string Name { get; set; }
         public int CategoryID { get; set; }
         public string ProductDescription { get; set; }
         public string Image { get; set; }
-        public List<int> AttachmentList { get; set; }
         public DateTime DateAdded { get; set; }         //format daty ewentualnie do zmiany
         public bool Promotion { get; set; }
         public int VAT { get; set; }
@@ -23,8 +22,14 @@ namespace ProjektSklep.Models
         public int SoldProducts { get; set; }
         public int ExpertID { get; set; }
 
-        //metody
-        public bool GenerateHTML()  //nieskonczone
+        /* POLA - ENTITY FRAMEWORK */
+        public Category Category { get; set; }
+        public ICollection<Attachment> Attachments { get; set; }
+        public Expert Expert { get; set; }
+        public Order Order { get; set; }
+
+        /* METODY */
+        public bool GenerateHTML()
         {
             return true;
         }
