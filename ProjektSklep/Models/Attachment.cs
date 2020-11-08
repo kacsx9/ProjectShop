@@ -8,7 +8,7 @@ namespace ProjektSklep.Models
     public class Attachment
     {
         /* POLA */
-        public int AttatchmentId { get; set; }
+        public int AttachmentId { get; set; }
         public string Path { get; set; }
         public string Description { get; set; }
 
