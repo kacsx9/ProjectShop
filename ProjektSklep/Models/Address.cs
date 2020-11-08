@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,6 +12,8 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int AddressID { get; set; }
+        [ForeignKey("Customer")]
+        public int CustomerID { get; set; }
         public string Country { get; set; }
         public string Town { get; set; }
         public string PostCode { get; set; }

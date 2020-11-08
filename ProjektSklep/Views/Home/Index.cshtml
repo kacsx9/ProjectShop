@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="list-group">
-        @foreach (Product p in ViewBag.produkty)
-        {
+<div class="list-group">
+    @foreach (Product p in ViewBag.produkty)
+    {
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div>OBRAZEK</div>
             <div style="float:right; width:80%;">
@@ -20,19 +20,19 @@
             </div>
             <div style="clear:both; font-size:1px;"></div>
         </a>
-        }
-    </div>
-    
+    }
+</div>
 
 
 
-@section Categories{
-    
-        @foreach (Category c in ViewBag.kategorie)
-        {
-            <button type="button" class="list-group-item list-group-item-action" id="category">@c.Name</button>
-        }
-    
+
+@*@section Categories{*@
+
+@*@foreach (Category c in ViewBag.kategorie) *@
+    {
+<!-- <button type="button" class="list-group-item list-group-item-action" id="category">@*@c.Name*@</button> -->
+}
+
 }
 
 

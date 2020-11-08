@@ -37,7 +37,7 @@ namespace ProjektSklep.Data
             }
             var addresses = new Address[]
             {
-                new Address{ Country="Polska", Town="Białystok", PostCode="12-123", Street="Wesoła", HouseNumber=123, ApartmentNumber=1 }
+                new Address{ CustomerID=1, Country="Polska", Town="Białystok", PostCode="12-123", Street="Wesoła", HouseNumber=123, ApartmentNumber=1 }
             };
 
             foreach (Address address in addresses)
@@ -53,7 +53,7 @@ namespace ProjektSklep.Data
             }
             var customers = new Customer[]
             {
-                new Customer{ FirstName="Michał", LastName="Kozikowski", Login="Michałek", Password="SIEMA", Email="123", AddressID=0, PageConfigurationId=0, AdminRights=false }
+                new Customer{ /*AddressID=0, PageConfigurationId=0,*/ FirstName="Michał", LastName="Kozikowski", Login="Michałek", Password="SIEMA", Email="123", AdminRights=false }
             };
 
             foreach (Customer customer in customers)
@@ -69,7 +69,7 @@ namespace ProjektSklep.Data
             }
             var pageConfigurations = new PageConfiguration[]
             {
-                new PageConfiguration{ SendingNewsletter=false, ShowNetPrices=false, ProductsPerPage=20, InterfaceSkin=0, Language=0, Currency=0 }
+                new PageConfiguration{ CustomerID=1, SendingNewsletter=false, ShowNetPrices=false, ProductsPerPage=20, InterfaceSkin=0, Language=0, Currency=0 }
             };
 
             foreach (PageConfiguration pageConfiguration in pageConfigurations)
@@ -85,7 +85,7 @@ namespace ProjektSklep.Data
             }
             var orders = new Order[]
             {
-                new Order{ CustomerID=0, ShippingMethodID=0, PaymentMethodID=0, OrderStatus=0 }
+                new Order{ CustomerID=1, /*ShippingMethodID=0, PaymentMethodID=0,*/ OrderStatus=0 }
             };
 
             foreach (Order order in orders)
@@ -101,7 +101,7 @@ namespace ProjektSklep.Data
             }
             var shippingMethods = new ShippingMethod[]
             {
-                new ShippingMethod{ Name="Kurier" }
+                new ShippingMethod{ OrderID=1, Name="Kurier" }
             };
 
             foreach (ShippingMethod shippingMethod in shippingMethods)
@@ -117,7 +117,7 @@ namespace ProjektSklep.Data
             }
             var paymentMethods = new PaymentMethod[]
             {
-                new PaymentMethod{ Name="Przelew" }
+                new PaymentMethod{ OrderID=1, Name="Przelew" }
             };
 
             foreach (PaymentMethod paymentMethod in paymentMethods)
@@ -133,7 +133,7 @@ namespace ProjektSklep.Data
             }
             var products = new Product[]
             {
-                new Product{ Name="Czipsy", CategoryID=0, ProductDescription="asd", Image="asd", DateAdded=new DateTime(), Promotion=false, VAT=23, Price=123, Amount=10, Visibility=true, SoldProducts=100, ExpertID=0 }
+                new Product{ CategoryID=1, ExpertID=1, Name="Czipsy", ProductDescription="asd", Image="asd", DateAdded=new DateTime(), Promotion=false, VAT=23, Price=123, Amount=10, Visibility=true, SoldProducts=100 }
             };
 
             foreach (Product product in products)
@@ -143,18 +143,18 @@ namespace ProjektSklep.Data
             context.SaveChanges();
 
             /* Categorys */
-            if (context.Categorys.Any())
+            if (context.Categories.Any())
             {
                 return;
             }
             var categories = new Category[]
             {
-                new Category{ ParentCategoryID=0, Name="asd", Visibility=true }
+                new Category{ /*ParentCategoryID=0,*/ Name="asd", Visibility=true }
             };
 
             foreach (Category category in categories)
             {
-                context.Categorys.Add(category);
+                context.Categories.Add(category);
             }
             context.SaveChanges();
 
@@ -165,7 +165,7 @@ namespace ProjektSklep.Data
             }
             var attachments = new Attachment[]
             {
-                new Attachment{ Path="sciezka", Description="asdasd" }
+                new Attachment{ ProductID=1, Path="sciezka", Description="asdasd" }
             };
 
             foreach (Attachment attachment in attachments)
@@ -187,6 +187,22 @@ namespace ProjektSklep.Data
             foreach (Expert expert in experts)
             {
                 context.Experts.Add(expert);
+            }
+            context.SaveChanges();
+
+            /* ProductOrders */
+            if (context.ProductOrders.Any())
+            {
+                return;
+            }
+            var productOrders = new ProductOrder[]
+            {
+                new ProductOrder{ OrderID=1, ProductID=1 }
+            };
+
+            foreach (ProductOrder productOrder in productOrders)
+            {
+                context.ProductOrders.Add(productOrder);
             }
             context.SaveChanges();
         }

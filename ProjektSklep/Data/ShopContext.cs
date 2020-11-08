@@ -18,9 +18,10 @@ namespace ProjektSklep.Data
         public DbSet<ShippingMethod> ShippingMethods { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categorys { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<Expert> Experts { get; set; }
+        public DbSet<ProductOrder> ProductOrders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +36,7 @@ namespace ProjektSklep.Data
             modelBuilder.Entity<Category>().ToTable("Category");
             modelBuilder.Entity<Attachment>().ToTable("Attachment");
             modelBuilder.Entity<Expert>().ToTable("Expert");
+            modelBuilder.Entity<ProductOrder>().ToTable("ProductOrder");
         }
     }
 }

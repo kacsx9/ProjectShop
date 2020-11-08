@@ -11,6 +11,7 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int AttachmentID { get; set; }
+        public int ProductID { get; set; }
         public string Path { get; set; }
         public string Description { get; set; }
 

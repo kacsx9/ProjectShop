@@ -11,8 +11,9 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int ProductID { get; set; }
-        public string Name { get; set; }
         public int CategoryID { get; set; }
+        public int ExpertID { get; set; }
+        public string Name { get; set; }
         public string ProductDescription { get; set; }
         public string Image { get; set; }
         [DataType(DataType.Date)]
@@ -24,13 +25,13 @@ namespace ProjektSklep.Models
         public int Amount { get; set; }
         public bool Visibility { get; set; }
         public int SoldProducts { get; set; }
-        public int ExpertID { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */
+        //public Order Order { get; set; }
         public Category Category { get; set; }
-        public ICollection<Attachment> Attachments { get; set; }
         public Expert Expert { get; set; }
-        public Order Order { get; set; }
+        public ICollection<Attachment> Attachments { get; set; }
+        public ICollection<ProductOrder> ProductOrders { get; set; }
 
         /* METODY */
         public bool GenerateHTML()

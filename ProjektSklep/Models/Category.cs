@@ -11,13 +11,13 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int CategoryID { get; set; }
-        public int ParentCategoryID { get; set; }
+        //public int ParentCategoryID { get; set; }
         public string Name { get; set; }
         public bool Visibility { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */
+        //public Category ParentCategory { get; set; }
         public ICollection<Product> Products { get; set; }
-        public Category ParentCategory { get; set; }
 
         /* METODY */
         public bool GenerateProductPriceList()
