@@ -142,8 +142,8 @@ namespace ProjektSklep.Data
             }
             context.SaveChanges();
 
-            /* Categories */
-            if (context.Categories.Any())
+            /* Categorys */
+            if (context.Categorys.Any())
             {
                 return;
             }
@@ -154,7 +154,7 @@ namespace ProjektSklep.Data
 
             foreach (Category category in categories)
             {
-                context.Categories.Add(category);
+                context.Categorys.Add(category);
             }
             context.SaveChanges();
 

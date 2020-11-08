@@ -18,7 +18,7 @@ namespace ProjektSklep.Data
         public DbSet<ShippingMethod> ShippingMethods { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Category> Categorys { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<Expert> Experts { get; set; }
 
