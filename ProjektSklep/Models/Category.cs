@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjektSklep.Models
 {
     public class Category
     {
         /* POLA */
+        [Key]
         public int CategoryID { get; set; }
         public int ParentCategoryID { get; set; }
         public string Name { get; set; }

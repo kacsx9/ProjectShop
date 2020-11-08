@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjektSklep.Models
 {
     public class Attachment
     {
         /* POLA */
+        [Key]
         public int AttachmentId { get; set; }
         public string Path { get; set; }
         public string Description { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace ProjektSklep.Models
     public class Order
     {
         /* POLA */
+        [Key]
         public int OrderID { get; set; }
         public int CustomerID { get; set; }
         public int ShippingMethodId { get; set; }

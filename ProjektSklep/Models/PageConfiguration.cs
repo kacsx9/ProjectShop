@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace ProjektSklep.Models
     public class PageConfiguration
     {
         /* POLA */
+        [Key]
         public int PageConfigurationId { get; set; }
         public bool SendingNewsletter { get; set; }
         public bool ShowNetPrices { get; set; }
