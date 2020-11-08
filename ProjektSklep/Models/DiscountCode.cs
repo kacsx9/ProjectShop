@@ -10,7 +10,7 @@ namespace ProjektSklep.Models
     {
         /* POLA */
         [Key]
-        public int DiscountCodeId { get; set; }
+        public int DiscountCodeID { get; set; }
         public string DiscoundCode { get; set; }
         public int Percent { get; set; }
     }

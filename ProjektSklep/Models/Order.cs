@@ -19,8 +19,8 @@ namespace ProjektSklep.Models
         [Key]
         public int OrderID { get; set; }
         public int CustomerID { get; set; }
-        public int ShippingMethodId { get; set; }
-        public int PaymentMethodId { get; set; }
+        public int ShippingMethodID { get; set; }
+        public int PaymentMethodID { get; set; }
         public State OrderStatus { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */

@@ -10,7 +10,7 @@ namespace ProjektSklep.Models
     {
         /* POLA */
         [Key]
-        public int PageConfigurationId { get; set; }
+        public int PageConfigurationID { get; set; }
         public bool SendingNewsletter { get; set; }
         public bool ShowNetPrices { get; set; }
         public int ProductsPerPage { get; set; }

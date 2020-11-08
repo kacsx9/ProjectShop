@@ -53,7 +53,7 @@ namespace ProjektSklep.Data
             }
             var customers = new Customer[]
             {
-                new Customer{ FirstName="Michał", LastName="Kozikowski", Login="Michałek", Password="SIEMA", Email="123", AddressId=0, PageConfigurationId=0, AdminRights=false }
+                new Customer{ FirstName="Michał", LastName="Kozikowski", Login="Michałek", Password="SIEMA", Email="123", AddressID=0, PageConfigurationId=0, AdminRights=false }
             };
 
             foreach (Customer customer in customers)
@@ -85,7 +85,7 @@ namespace ProjektSklep.Data
             }
             var orders = new Order[]
             {
-                new Order{ CustomerID=0, ShippingMethodId=0, PaymentMethodId=0, OrderStatus=0 }
+                new Order{ CustomerID=0, ShippingMethodID=0, PaymentMethodID=0, OrderStatus=0 }
             };
 
             foreach (Order order in orders)

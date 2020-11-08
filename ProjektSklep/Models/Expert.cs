@@ -10,7 +10,7 @@ namespace ProjektSklep.Models
     {
         /* POLA */
         [Key]
-        public int ExpertId { get; set; }
+        public int ExpertID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

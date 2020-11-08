@@ -15,6 +15,8 @@ namespace ProjektSklep.Models
         public int CategoryID { get; set; }
         public string ProductDescription { get; set; }
         public string Image { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateAdded { get; set; }         //format daty ewentualnie do zmiany
         public bool Promotion { get; set; }
         public int VAT { get; set; }
