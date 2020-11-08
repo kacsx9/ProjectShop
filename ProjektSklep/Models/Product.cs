@@ -16,7 +16,7 @@ namespace ProjektSklep.Models
         public DateTime DateAdded { get; set; }         //format daty ewentualnie do zmiany
         public bool Promotion { get; set; }
         public int VAT { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public int Amount { get; set; }
         public bool Visibility { get; set; }
         public int SoldProducts { get; set; }

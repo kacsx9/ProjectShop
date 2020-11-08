@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ProjektSklep</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href=@Url.Content("~/lib/bootstrap/dist/css/bootstrap.min.css") />
+    <link rel="stylesheet" type="text/css" href=@Url.Content("~/css/site.css") />    
 </head>
 <body>
     <div class="page-header">
@@ -24,23 +24,25 @@
                     </div>
                 </div>
             </div>
-            <nav class="navbar navbar-light bg-light">
-                <button class="btn btn-secondary" type="button"> Ustawienia </button>
-            </nav>
-            <nav class="navbar navbar-light bg-light">
-                <button class="btn btn-secondary" type="button"> Zaloguj się </button>
-            </nav>
+            <div>
+                <nav class="navbar navbar-light bg-light">
+                    <button class="btn btn-secondary" type="button"> Ustawienia </button> &nbsp;
+                    @*</nav>
+        <nav class="navbar navbar-light bg-light">*@
+                    <button class="btn btn-secondary" type="button"> Zaloguj się </button>
+                </nav>
+            </div>
         </nav>
     </div>
     <div class="container-fluid">
         <div class="row" >
             <nav id="nav-sidebar" class="bg-faded" >
-                <div class="sidebar-header hidden-sm-down">
+                @*<div class="sidebar-header hidden-sm-down">
                     <h2>Kategorie</h2>
                     <hr />
-                </div>
+                </div>*@
                 <div class="sidebar-content hidden-sm-down">
-                    <ul class="nav nav-pills flex-column">
+                    <ul class="list-group list-group-flush" id="categories">
                         @RenderSection("Categories", required: true);
                      </ul>
                 </div>
