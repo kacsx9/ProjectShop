@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjektSklep.Models;
-//using System.Data.Entity;
 
 namespace ProjektSklep.Data
 {
