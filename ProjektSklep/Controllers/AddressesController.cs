@@ -19,7 +19,7 @@ namespace ProjektSklep
             _context = context;
         }
 
-        // GET: Addresses.
+        // GET: Addresses
         public async Task<IActionResult> Index()
         {
             return View(await _context.Addresses.ToListAsync());
