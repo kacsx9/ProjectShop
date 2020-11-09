@@ -22,8 +22,7 @@ namespace ProjektSklep
         // GET: PageConfigurations
         public async Task<IActionResult> Index()
         {
-            var shopContext = _context.PageConfigurations.Include(p => p.Customer);
-            return View(await shopContext.ToListAsync());
+            return View(await _context.PageConfigurations.ToListAsync());
         }
 
         // GET: PageConfigurations/Details/5
@@ -35,7 +34,6 @@ namespace ProjektSklep
             }
 
             var pageConfiguration = await _context.PageConfigurations
-                .Include(p => p.Customer)
                 .FirstOrDefaultAsync(m => m.PageConfigurationID == id);
             if (pageConfiguration == null)
             {
@@ -48,7 +46,6 @@ namespace ProjektSklep
         // GET: PageConfigurations/Create
         public IActionResult Create()
         {
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID");
             return View();
         }
 
@@ -65,7 +62,6 @@ namespace ProjektSklep
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID", pageConfiguration.CustomerID);
             return View(pageConfiguration);
         }
 
@@ -82,7 +78,6 @@ namespace ProjektSklep
             {
                 return NotFound();
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID", pageConfiguration.CustomerID);
             return View(pageConfiguration);
         }
 
@@ -118,7 +113,6 @@ namespace ProjektSklep
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID", pageConfiguration.CustomerID);
             return View(pageConfiguration);
         }
 
@@ -131,7 +125,6 @@ namespace ProjektSklep
             }
 
             var pageConfiguration = await _context.PageConfigurations
-                .Include(p => p.Customer)
                 .FirstOrDefaultAsync(m => m.PageConfigurationID == id);
             if (pageConfiguration == null)
             {

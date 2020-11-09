@@ -22,8 +22,7 @@ namespace ProjektSklep
         // GET: Addresses
         public async Task<IActionResult> Index()
         {
-            var shopContext = _context.Addresses.Include(a => a.Customer);
-            return View(await shopContext.ToListAsync());
+            return View(await _context.Addresses.ToListAsync());
         }
 
         // GET: Addresses/Details/5
@@ -35,7 +34,6 @@ namespace ProjektSklep
             }
 
             var address = await _context.Addresses
-                .Include(a => a.Customer)
                 .FirstOrDefaultAsync(m => m.AddressID == id);
             if (address == null)
             {
@@ -48,7 +46,6 @@ namespace ProjektSklep
         // GET: Addresses/Create
         public IActionResult Create()
         {
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID");
             return View();
         }
 
@@ -65,7 +62,6 @@ namespace ProjektSklep
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID", address.CustomerID);
             return View(address);
         }
 
@@ -82,7 +78,6 @@ namespace ProjektSklep
             {
                 return NotFound();
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID", address.CustomerID);
             return View(address);
         }
 
@@ -118,7 +113,6 @@ namespace ProjektSklep
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID", address.CustomerID);
             return View(address);
         }
 
@@ -131,7 +125,6 @@ namespace ProjektSklep
             }
 
             var address = await _context.Addresses
-                .Include(a => a.Customer)
                 .FirstOrDefaultAsync(m => m.AddressID == id);
             if (address == null)
             {

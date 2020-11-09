@@ -22,7 +22,8 @@ namespace ProjektSklep
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Customers.ToListAsync());
+            var shopContext = _context.Customers.Include(c => c.Address).Include(c => c.PageConfiguration);
+            return View(await shopContext.ToListAsync());
         }
 
         // GET: Customers/Details/5
@@ -34,6 +35,8 @@ namespace ProjektSklep
             }
 
             var customer = await _context.Customers
+                .Include(c => c.Address)
+                .Include(c => c.PageConfiguration)
                 .FirstOrDefaultAsync(m => m.CustomerID == id);
             if (customer == null)
             {
@@ -46,6 +49,8 @@ namespace ProjektSklep
         // GET: Customers/Create
         public IActionResult Create()
         {
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressID");
+            ViewData["PageConfigurationId"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace ProjektSklep
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerID,FirstName,LastName,Login,Password,Email,AdminRights")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerID,AddressID,PageConfigurationId,FirstName,LastName,Login,Password,Email,AdminRights")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +67,8 @@ namespace ProjektSklep
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressID", customer.AddressID);
+            ViewData["PageConfigurationId"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID", customer.PageConfigurationId);
             return View(customer);
         }
 
@@ -78,6 +85,8 @@ namespace ProjektSklep
             {
                 return NotFound();
             }
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressID", customer.AddressID);
+            ViewData["PageConfigurationId"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID", customer.PageConfigurationId);
             return View(customer);
         }
 
@@ -86,7 +95,7 @@ namespace ProjektSklep
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerID,FirstName,LastName,Login,Password,Email,AdminRights")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("CustomerID,AddressID,PageConfigurationId,FirstName,LastName,Login,Password,Email,AdminRights")] Customer customer)
         {
             if (id != customer.CustomerID)
             {
@@ -113,6 +122,8 @@ namespace ProjektSklep
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressID", customer.AddressID);
+            ViewData["PageConfigurationId"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID", customer.PageConfigurationId);
             return View(customer);
         }
 
@@ -125,6 +136,8 @@ namespace ProjektSklep
             }
 
             var customer = await _context.Customers
+                .Include(c => c.Address)
+                .Include(c => c.PageConfiguration)
                 .FirstOrDefaultAsync(m => m.CustomerID == id);
             if (customer == null)
             {

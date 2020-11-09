@@ -30,6 +30,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.AdminRights)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageConfiguration)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -53,6 +59,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AdminRights)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.AddressID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PageConfiguration.PageConfigurationID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CustomerID">Edit</a> |

@@ -22,8 +22,7 @@ namespace ProjektSklep
         // GET: ShippingMethods
         public async Task<IActionResult> Index()
         {
-            var shopContext = _context.ShippingMethods.Include(s => s.Order);
-            return View(await shopContext.ToListAsync());
+            return View(await _context.ShippingMethods.ToListAsync());
         }
 
         // GET: ShippingMethods/Details/5
@@ -35,7 +34,6 @@ namespace ProjektSklep
             }
 
             var shippingMethod = await _context.ShippingMethods
-                .Include(s => s.Order)
                 .FirstOrDefaultAsync(m => m.ShippingMethodID == id);
             if (shippingMethod == null)
             {
@@ -48,7 +46,6 @@ namespace ProjektSklep
         // GET: ShippingMethods/Create
         public IActionResult Create()
         {
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID");
             return View();
         }
 
@@ -65,7 +62,6 @@ namespace ProjektSklep
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID", shippingMethod.OrderID);
             return View(shippingMethod);
         }
 
@@ -82,7 +78,6 @@ namespace ProjektSklep
             {
                 return NotFound();
             }
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID", shippingMethod.OrderID);
             return View(shippingMethod);
         }
 
@@ -118,7 +113,6 @@ namespace ProjektSklep
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID", shippingMethod.OrderID);
             return View(shippingMethod);
         }
 
@@ -131,7 +125,6 @@ namespace ProjektSklep
             }
 
             var shippingMethod = await _context.ShippingMethods
-                .Include(s => s.Order)
                 .FirstOrDefaultAsync(m => m.ShippingMethodID == id);
             if (shippingMethod == null)
             {

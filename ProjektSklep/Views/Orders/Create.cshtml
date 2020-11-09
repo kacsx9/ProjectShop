@@ -17,6 +17,14 @@
                 <select asp-for="CustomerID" class ="form-control" asp-items="ViewBag.CustomerID"></select>
             </div>
             <div class="form-group">
+                <label asp-for="ShippingMethodID" class="control-label"></label>
+                <select asp-for="ShippingMethodID" class ="form-control" asp-items="ViewBag.ShippingMethodID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentMethodID" class="control-label"></label>
+                <select asp-for="PaymentMethodID" class ="form-control" asp-items="ViewBag.PaymentMethodID"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="OrderStatus" class="control-label"></label>
                 <select asp-for="OrderStatus" class="form-control"></select>
                 <span asp-validation-for="OrderStatus" class="text-danger"></span>

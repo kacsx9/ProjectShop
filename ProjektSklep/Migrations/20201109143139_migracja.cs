@@ -3,10 +3,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjektSklep.Migrations
 {
-    public partial class NewDatabaseMigration : Migration
+    public partial class migracja : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Address",
+                columns: table => new
+                {
+                    AddressID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerID = table.Column<int>(nullable: false),
+                    Country = table.Column<string>(nullable: true),
+                    Town = table.Column<string>(nullable: true),
+                    PostCode = table.Column<string>(nullable: true),
+                    Street = table.Column<string>(nullable: true),
+                    HouseNumber = table.Column<int>(nullable: false),
+                    ApartmentNumber = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.AddressID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
@@ -19,24 +38,6 @@ namespace ProjektSklep.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.CategoryID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Customer",
-                columns: table => new
-                {
-                    CustomerID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Login = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    AdminRights = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customer", x => x.CustomerID);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,51 +70,6 @@ namespace ProjektSklep.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Address",
-                columns: table => new
-                {
-                    AddressID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerID = table.Column<int>(nullable: false),
-                    Country = table.Column<string>(nullable: true),
-                    Town = table.Column<string>(nullable: true),
-                    PostCode = table.Column<string>(nullable: true),
-                    Street = table.Column<string>(nullable: true),
-                    HouseNumber = table.Column<int>(nullable: false),
-                    ApartmentNumber = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Address", x => x.AddressID);
-                    table.ForeignKey(
-                        name: "FK_Address_Customer_CustomerID",
-                        column: x => x.CustomerID,
-                        principalTable: "Customer",
-                        principalColumn: "CustomerID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Order",
-                columns: table => new
-                {
-                    OrderID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerID = table.Column<int>(nullable: false),
-                    OrderStatus = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Order", x => x.OrderID);
-                    table.ForeignKey(
-                        name: "FK_Order_Customer_CustomerID",
-                        column: x => x.CustomerID,
-                        principalTable: "Customer",
-                        principalColumn: "CustomerID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PageConfiguration",
                 columns: table => new
                 {
@@ -130,12 +86,34 @@ namespace ProjektSklep.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PageConfiguration", x => x.PageConfigurationID);
-                    table.ForeignKey(
-                        name: "FK_PageConfiguration_Customer_CustomerID",
-                        column: x => x.CustomerID,
-                        principalTable: "Customer",
-                        principalColumn: "CustomerID",
-                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PaymentMethod",
+                columns: table => new
+                {
+                    PaymentMethodID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderID = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentMethod", x => x.PaymentMethodID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShippingMethod",
+                columns: table => new
+                {
+                    ShippingMethodID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderID = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShippingMethod", x => x.ShippingMethodID);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,42 +153,34 @@ namespace ProjektSklep.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PaymentMethod",
+                name: "Customer",
                 columns: table => new
                 {
-                    PaymentMethodID = table.Column<int>(nullable: false)
+                    CustomerID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderID = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    AddressID = table.Column<int>(nullable: false),
+                    PageConfigurationId = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Login = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    AdminRights = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PaymentMethod", x => x.PaymentMethodID);
+                    table.PrimaryKey("PK_Customer", x => x.CustomerID);
                     table.ForeignKey(
-                        name: "FK_PaymentMethod_Order_OrderID",
-                        column: x => x.OrderID,
-                        principalTable: "Order",
-                        principalColumn: "OrderID",
+                        name: "FK_Customer_Address_AddressID",
+                        column: x => x.AddressID,
+                        principalTable: "Address",
+                        principalColumn: "AddressID",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ShippingMethod",
-                columns: table => new
-                {
-                    ShippingMethodID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderID = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShippingMethod", x => x.ShippingMethodID);
                     table.ForeignKey(
-                        name: "FK_ShippingMethod_Order_OrderID",
-                        column: x => x.OrderID,
-                        principalTable: "Order",
-                        principalColumn: "OrderID",
+                        name: "FK_Customer_PageConfiguration_PageConfigurationId",
+                        column: x => x.PageConfigurationId,
+                        principalTable: "PageConfiguration",
+                        principalColumn: "PageConfigurationID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -232,6 +202,40 @@ namespace ProjektSklep.Migrations
                         column: x => x.ProductID,
                         principalTable: "Product",
                         principalColumn: "ProductID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    OrderID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerID = table.Column<int>(nullable: false),
+                    ShippingMethodID = table.Column<int>(nullable: false),
+                    PaymentMethodID = table.Column<int>(nullable: false),
+                    OrderStatus = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.OrderID);
+                    table.ForeignKey(
+                        name: "FK_Order_Customer_CustomerID",
+                        column: x => x.CustomerID,
+                        principalTable: "Customer",
+                        principalColumn: "CustomerID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Order_PaymentMethod_PaymentMethodID",
+                        column: x => x.PaymentMethodID,
+                        principalTable: "PaymentMethod",
+                        principalColumn: "PaymentMethodID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Order_ShippingMethod_ShippingMethodID",
+                        column: x => x.ShippingMethodID,
+                        principalTable: "ShippingMethod",
+                        principalColumn: "ShippingMethodID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -262,15 +266,19 @@ namespace ProjektSklep.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_CustomerID",
-                table: "Address",
-                column: "CustomerID",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Attachment_ProductID",
                 table: "Attachment",
                 column: "ProductID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customer_AddressID",
+                table: "Customer",
+                column: "AddressID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customer_PageConfigurationId",
+                table: "Customer",
+                column: "PageConfigurationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_CustomerID",
@@ -278,16 +286,14 @@ namespace ProjektSklep.Migrations
                 column: "CustomerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PageConfiguration_CustomerID",
-                table: "PageConfiguration",
-                column: "CustomerID",
-                unique: true);
+                name: "IX_Order_PaymentMethodID",
+                table: "Order",
+                column: "PaymentMethodID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PaymentMethod_OrderID",
-                table: "PaymentMethod",
-                column: "OrderID",
-                unique: true);
+                name: "IX_Order_ShippingMethodID",
+                table: "Order",
+                column: "ShippingMethodID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryID",
@@ -308,19 +314,10 @@ namespace ProjektSklep.Migrations
                 name: "IX_ProductOrder_ProductID",
                 table: "ProductOrder",
                 column: "ProductID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShippingMethod_OrderID",
-                table: "ShippingMethod",
-                column: "OrderID",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Address");
-
             migrationBuilder.DropTable(
                 name: "Attachment");
 
@@ -328,22 +325,22 @@ namespace ProjektSklep.Migrations
                 name: "DiscountCode");
 
             migrationBuilder.DropTable(
-                name: "PageConfiguration");
-
-            migrationBuilder.DropTable(
-                name: "PaymentMethod");
-
-            migrationBuilder.DropTable(
                 name: "ProductOrder");
 
             migrationBuilder.DropTable(
-                name: "ShippingMethod");
+                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Customer");
+
+            migrationBuilder.DropTable(
+                name: "PaymentMethod");
+
+            migrationBuilder.DropTable(
+                name: "ShippingMethod");
 
             migrationBuilder.DropTable(
                 name: "Category");
@@ -352,7 +349,10 @@ namespace ProjektSklep.Migrations
                 name: "Expert");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Address");
+
+            migrationBuilder.DropTable(
+                name: "PageConfiguration");
         }
     }
 }

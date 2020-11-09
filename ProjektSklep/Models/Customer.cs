@@ -12,10 +12,10 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int CustomerID { get; set; }
-        /*[ForeignKey("Address")]
+        [ForeignKey("Address")]
         public int AddressID { get; set; }
         [ForeignKey("PageConfiguration")]
-        public int PageConfigurationId { get; set; }*/
+        public int PageConfigurationId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Login { get; set; }

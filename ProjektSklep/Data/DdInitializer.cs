@@ -46,22 +46,6 @@ namespace ProjektSklep.Data
             }
             context.SaveChanges();
 
-            /* Customers */
-            if (context.Customers.Any())
-            {
-                return;
-            }
-            var customers = new Customer[]
-            {
-                new Customer{ /*AddressID=0, PageConfigurationId=0,*/ FirstName="Michał", LastName="Kozikowski", Login="Michałek", Password="SIEMA", Email="123", AdminRights=false }
-            };
-
-            foreach (Customer customer in customers)
-            {
-                context.Customers.Add(customer);
-            }
-            context.SaveChanges();
-
             /* PageConfigurations */
             if (context.PageConfigurations.Any())
             {
@@ -78,19 +62,19 @@ namespace ProjektSklep.Data
             }
             context.SaveChanges();
 
-            /* Orders */
-            if (context.Orders.Any())
+            /* Customers */
+            if (context.Customers.Any())
             {
                 return;
             }
-            var orders = new Order[]
+            var customers = new Customer[]
             {
-                new Order{ CustomerID=1, /*ShippingMethodID=0, PaymentMethodID=0,*/ OrderStatus=0 }
+                new Customer{ AddressID=1, PageConfigurationId=1, FirstName="Michał", LastName="Kozikowski", Login="Michałek", Password="SIEMA", Email="123", AdminRights=false }
             };
 
-            foreach (Order order in orders)
+            foreach (Customer customer in customers)
             {
-                context.Orders.Add(order);
+                context.Customers.Add(customer);
             }
             context.SaveChanges();
 
@@ -126,19 +110,35 @@ namespace ProjektSklep.Data
             }
             context.SaveChanges();
 
-            /* Products */
-            if (context.Products.Any())
+            /* Orders */
+            if (context.Orders.Any())
             {
                 return;
             }
-            var products = new Product[]
+            var orders = new Order[]
             {
-                new Product{ CategoryID=1, ExpertID=1, Name="Czipsy", ProductDescription="asd", Image="asd", DateAdded=new DateTime(), Promotion=false, VAT=23, Price=123, Amount=10, Visibility=true, SoldProducts=100 }
+                new Order{ CustomerID=1, ShippingMethodID=1, PaymentMethodID=1, OrderStatus=0 }
             };
 
-            foreach (Product product in products)
+            foreach (Order order in orders)
             {
-                context.Products.Add(product);
+                context.Orders.Add(order);
+            }
+            context.SaveChanges();
+
+            /* Experts */
+            if (context.Experts.Any())
+            {
+                return;
+            }
+            var experts = new Expert[]
+            {
+                new Expert{ FirstName="Bartuś", LastName="UMMM", Email="asd"}
+            };
+
+            foreach (Expert expert in experts)
+            {
+                context.Experts.Add(expert);
             }
             context.SaveChanges();
 
@@ -158,6 +158,22 @@ namespace ProjektSklep.Data
             }
             context.SaveChanges();
 
+            /* Products */
+            if (context.Products.Any())
+            {
+                return;
+            }
+            var products = new Product[]
+            {
+                new Product{ CategoryID=1, ExpertID=1, Name="Czipsy", ProductDescription="asd", Image="asd", DateAdded=new DateTime(), Promotion=false, VAT=23, Price=123, Amount=10, Visibility=true, SoldProducts=100 }
+            };
+
+            foreach (Product product in products)
+            {
+                context.Products.Add(product);
+            }
+            context.SaveChanges();
+
             /* Attachments */
             if (context.Attachments.Any())
             {
@@ -171,22 +187,6 @@ namespace ProjektSklep.Data
             foreach (Attachment attachment in attachments)
             {
                 context.Attachments.Add(attachment);
-            }
-            context.SaveChanges();
-
-            /* Experts */
-            if (context.Experts.Any())
-            {
-                return;
-            }
-            var experts = new Expert[]
-            {
-                new Expert{ FirstName="Bartuś", LastName="UMMM", Email="asd"}
-            };
-
-            foreach (Expert expert in experts)
-            {
-                context.Experts.Add(expert);
             }
             context.SaveChanges();
 

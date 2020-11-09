@@ -49,9 +49,6 @@ namespace ProjektSklep.Migrations
 
                     b.HasKey("AddressID");
 
-                    b.HasIndex("CustomerID")
-                        .IsUnique();
-
                     b.ToTable("Address");
                 });
 
@@ -103,6 +100,9 @@ namespace ProjektSklep.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AddressID")
+                        .HasColumnType("int");
+
                     b.Property<bool>("AdminRights")
                         .HasColumnType("bit");
 
@@ -118,10 +118,17 @@ namespace ProjektSklep.Migrations
                     b.Property<string>("Login")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PageConfigurationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustomerID");
+
+                    b.HasIndex("AddressID");
+
+                    b.HasIndex("PageConfigurationId");
 
                     b.ToTable("Customer");
                 });
@@ -178,9 +185,19 @@ namespace ProjektSklep.Migrations
                     b.Property<int>("OrderStatus")
                         .HasColumnType("int");
 
+                    b.Property<int>("PaymentMethodID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShippingMethodID")
+                        .HasColumnType("int");
+
                     b.HasKey("OrderID");
 
                     b.HasIndex("CustomerID");
+
+                    b.HasIndex("PaymentMethodID");
+
+                    b.HasIndex("ShippingMethodID");
 
                     b.ToTable("Order");
                 });
@@ -215,9 +232,6 @@ namespace ProjektSklep.Migrations
 
                     b.HasKey("PageConfigurationID");
 
-                    b.HasIndex("CustomerID")
-                        .IsUnique();
-
                     b.ToTable("PageConfiguration");
                 });
 
@@ -235,9 +249,6 @@ namespace ProjektSklep.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("PaymentMethodID");
-
-                    b.HasIndex("OrderID")
-                        .IsUnique();
 
                     b.ToTable("PaymentMethod");
                 });
@@ -331,19 +342,7 @@ namespace ProjektSklep.Migrations
 
                     b.HasKey("ShippingMethodID");
 
-                    b.HasIndex("OrderID")
-                        .IsUnique();
-
                     b.ToTable("ShippingMethod");
-                });
-
-            modelBuilder.Entity("ProjektSklep.Models.Address", b =>
-                {
-                    b.HasOne("ProjektSklep.Models.Customer", "Customer")
-                        .WithOne("Address")
-                        .HasForeignKey("ProjektSklep.Models.Address", "CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProjektSklep.Models.Attachment", b =>
@@ -355,6 +354,21 @@ namespace ProjektSklep.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProjektSklep.Models.Customer", b =>
+                {
+                    b.HasOne("ProjektSklep.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjektSklep.Models.PageConfiguration", "PageConfiguration")
+                        .WithMany()
+                        .HasForeignKey("PageConfigurationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ProjektSklep.Models.Order", b =>
                 {
                     b.HasOne("ProjektSklep.Models.Customer", "Customer")
@@ -362,22 +376,16 @@ namespace ProjektSklep.Migrations
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("ProjektSklep.Models.PageConfiguration", b =>
-                {
-                    b.HasOne("ProjektSklep.Models.Customer", "Customer")
-                        .WithOne("PageConfiguration")
-                        .HasForeignKey("ProjektSklep.Models.PageConfiguration", "CustomerID")
+                    b.HasOne("ProjektSklep.Models.PaymentMethod", "PaymentMethod")
+                        .WithMany()
+                        .HasForeignKey("PaymentMethodID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("ProjektSklep.Models.PaymentMethod", b =>
-                {
-                    b.HasOne("ProjektSklep.Models.Order", "Order")
-                        .WithOne("PaymentMethod")
-                        .HasForeignKey("ProjektSklep.Models.PaymentMethod", "OrderID")
+                    b.HasOne("ProjektSklep.Models.ShippingMethod", "ShippingMethod")
+                        .WithMany()
+                        .HasForeignKey("ShippingMethodID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -408,15 +416,6 @@ namespace ProjektSklep.Migrations
                     b.HasOne("ProjektSklep.Models.Product", "Product")
                         .WithMany("ProductOrders")
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProjektSklep.Models.ShippingMethod", b =>
-                {
-                    b.HasOne("ProjektSklep.Models.Order", "Order")
-                        .WithOne("ShippingMethod")
-                        .HasForeignKey("ProjektSklep.Models.ShippingMethod", "OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

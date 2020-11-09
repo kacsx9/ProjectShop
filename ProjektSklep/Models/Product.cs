@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,9 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int ProductID { get; set; }
+        [ForeignKey("Category")]
         public int CategoryID { get; set; }
+        [ForeignKey("Expert")]
         public int ExpertID { get; set; }
         public string Name { get; set; }
         public string ProductDescription { get; set; }

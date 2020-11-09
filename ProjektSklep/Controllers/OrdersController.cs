@@ -22,7 +22,7 @@ namespace ProjektSklep
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var shopContext = _context.Orders.Include(o => o.Customer);
+            var shopContext = _context.Orders.Include(o => o.Customer).Include(o => o.PaymentMethod).Include(o => o.ShippingMethod);
             return View(await shopContext.ToListAsync());
         }
 
@@ -36,6 +36,8 @@ namespace ProjektSklep
 
             var order = await _context.Orders
                 .Include(o => o.Customer)
+                .Include(o => o.PaymentMethod)
+                .Include(o => o.ShippingMethod)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
             if (order == null)
             {
@@ -49,6 +51,8 @@ namespace ProjektSklep
         public IActionResult Create()
         {
             ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID");
+            ViewData["PaymentMethodID"] = new SelectList(_context.PaymentMethods, "PaymentMethodID", "PaymentMethodID");
+            ViewData["ShippingMethodID"] = new SelectList(_context.ShippingMethods, "ShippingMethodID", "ShippingMethodID");
             return View();
         }
 
@@ -57,7 +61,7 @@ namespace ProjektSklep
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderID,CustomerID,OrderStatus")] Order order)
+        public async Task<IActionResult> Create([Bind("OrderID,CustomerID,ShippingMethodID,PaymentMethodID,OrderStatus")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +70,8 @@ namespace ProjektSklep
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID", order.CustomerID);
+            ViewData["PaymentMethodID"] = new SelectList(_context.PaymentMethods, "PaymentMethodID", "PaymentMethodID", order.PaymentMethodID);
+            ViewData["ShippingMethodID"] = new SelectList(_context.ShippingMethods, "ShippingMethodID", "ShippingMethodID", order.ShippingMethodID);
             return View(order);
         }
 
@@ -83,6 +89,8 @@ namespace ProjektSklep
                 return NotFound();
             }
             ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID", order.CustomerID);
+            ViewData["PaymentMethodID"] = new SelectList(_context.PaymentMethods, "PaymentMethodID", "PaymentMethodID", order.PaymentMethodID);
+            ViewData["ShippingMethodID"] = new SelectList(_context.ShippingMethods, "ShippingMethodID", "ShippingMethodID", order.ShippingMethodID);
             return View(order);
         }
 
@@ -91,7 +99,7 @@ namespace ProjektSklep
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderID,CustomerID,OrderStatus")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderID,CustomerID,ShippingMethodID,PaymentMethodID,OrderStatus")] Order order)
         {
             if (id != order.OrderID)
             {
@@ -119,6 +127,8 @@ namespace ProjektSklep
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID", order.CustomerID);
+            ViewData["PaymentMethodID"] = new SelectList(_context.PaymentMethods, "PaymentMethodID", "PaymentMethodID", order.PaymentMethodID);
+            ViewData["ShippingMethodID"] = new SelectList(_context.ShippingMethods, "ShippingMethodID", "ShippingMethodID", order.ShippingMethodID);
             return View(order);
         }
 
@@ -132,6 +142,8 @@ namespace ProjektSklep
 
             var order = await _context.Orders
                 .Include(o => o.Customer)
+                .Include(o => o.PaymentMethod)
+                .Include(o => o.ShippingMethod)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
             if (order == null)
             {

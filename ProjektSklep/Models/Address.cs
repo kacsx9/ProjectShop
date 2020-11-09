@@ -12,7 +12,7 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int AddressID { get; set; }
-        [ForeignKey("Customer")]
+        //[ForeignKey("Customer")]
         public int CustomerID { get; set; }
         public string Country { get; set; }
         public string Town { get; set; }
@@ -22,6 +22,6 @@ namespace ProjektSklep.Models
         public int ApartmentNumber { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */
-        public Customer Customer { get; set; }
+        //public Customer Customer { get; set; }
     }
 }

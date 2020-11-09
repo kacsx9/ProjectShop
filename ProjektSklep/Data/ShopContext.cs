@@ -12,7 +12,7 @@ namespace ProjektSklep.Data
 
         public DbSet<DiscountCode> DiscountCodes { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<Customer> Customers{ get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<PageConfiguration> PageConfigurations { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ShippingMethod> ShippingMethods { get; set; }

@@ -22,8 +22,7 @@ namespace ProjektSklep
         // GET: PaymentMethods
         public async Task<IActionResult> Index()
         {
-            var shopContext = _context.PaymentMethods.Include(p => p.Order);
-            return View(await shopContext.ToListAsync());
+            return View(await _context.PaymentMethods.ToListAsync());
         }
 
         // GET: PaymentMethods/Details/5
@@ -35,7 +34,6 @@ namespace ProjektSklep
             }
 
             var paymentMethod = await _context.PaymentMethods
-                .Include(p => p.Order)
                 .FirstOrDefaultAsync(m => m.PaymentMethodID == id);
             if (paymentMethod == null)
             {
@@ -48,7 +46,6 @@ namespace ProjektSklep
         // GET: PaymentMethods/Create
         public IActionResult Create()
         {
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID");
             return View();
         }
 
@@ -65,7 +62,6 @@ namespace ProjektSklep
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID", paymentMethod.OrderID);
             return View(paymentMethod);
         }
 
@@ -82,7 +78,6 @@ namespace ProjektSklep
             {
                 return NotFound();
             }
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID", paymentMethod.OrderID);
             return View(paymentMethod);
         }
 
@@ -118,7 +113,6 @@ namespace ProjektSklep
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID", paymentMethod.OrderID);
             return View(paymentMethod);
         }
 
@@ -131,7 +125,6 @@ namespace ProjektSklep
             }
 
             var paymentMethod = await _context.PaymentMethods
-                .Include(p => p.Order)
                 .FirstOrDefaultAsync(m => m.PaymentMethodID == id);
             if (paymentMethod == null)
             {

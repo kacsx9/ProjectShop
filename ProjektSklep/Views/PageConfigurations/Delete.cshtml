@@ -12,6 +12,12 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.SendingNewsletter)
         </dt>
         <dd class = "col-sm-10">
@@ -47,12 +53,6 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Currency)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Customer.CustomerID)
-        </dd class>
     </dl>
     
     <form asp-action="Delete">
