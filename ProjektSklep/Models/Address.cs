@@ -12,16 +12,12 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int AddressID { get; set; }
-        //[ForeignKey("Customer")]
         public int CustomerID { get; set; }
         public string Country { get; set; }
         public string Town { get; set; }
         public string PostCode { get; set; }
         public string Street { get; set; }
         public int HouseNumber { get; set; }
-        public int ApartmentNumber { get; set; }
-
-        /* POLA - ENTITY FRAMEWORK */
-        //public Customer Customer { get; set; }
+        public int? ApartmentNumber { get; set; }
     }
 }

@@ -21,16 +21,16 @@ namespace ProjektSklep.Models
         public string Image { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime DateAdded { get; set; }         //format daty ewentualnie do zmiany
+        public DateTime DateAdded { get; set; }
         public bool Promotion { get; set; }
         public int VAT { get; set; }
-        public double Price { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Price { get; set; }
         public int Amount { get; set; }
         public bool Visibility { get; set; }
         public int SoldProducts { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */
-        //public Order Order { get; set; }
         public Category Category { get; set; }
         public Expert Expert { get; set; }
         public ICollection<Attachment> Attachments { get; set; }

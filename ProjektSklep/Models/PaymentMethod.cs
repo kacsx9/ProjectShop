@@ -12,11 +12,9 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int PaymentMethodID { get; set; }
-        //[ForeignKey("Order")]
-        public int OrderID { get; set; }
         public string Name { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */
-        //public Order Order { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

@@ -10,22 +10,23 @@ using ProjektSklep.Models;
 
 namespace ProjektSklep
 {
-    public class ShippingMethodsController : Controller
+    public class CategoriesController : Controller
     {
         private readonly ShopContext _context;
 
-        public ShippingMethodsController(ShopContext context)
+        public CategoriesController(ShopContext context)
         {
             _context = context;
         }
 
-        // GET: ShippingMethods
+        // GET: Categories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ShippingMethods.ToListAsync());
+            var shopContext = _context.Categories.Include(c => c.Parent);
+            return View(await shopContext.ToListAsync());
         }
 
-        // GET: ShippingMethods/Details/5
+        // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace ProjektSklep
                 return NotFound();
             }
 
-            var shippingMethod = await _context.ShippingMethods
-                .FirstOrDefaultAsync(m => m.ShippingMethodID == id);
-            if (shippingMethod == null)
+            var category = await _context.Categories
+                .Include(c => c.Parent)
+                .FirstOrDefaultAsync(m => m.CategoryID == id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(shippingMethod);
+            return View(category);
         }
 
-        // GET: ShippingMethods/Create
+        // GET: Categories/Create
         public IActionResult Create()
         {
+            ViewData["ParentCategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID");
             return View();
         }
 
-        // POST: ShippingMethods/Create
+        // POST: Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShippingMethodID,OrderID,Name")] ShippingMethod shippingMethod)
+        public async Task<IActionResult> Create([Bind("CategoryID,ParentCategoryID,Name,Visibility")] Category category)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(shippingMethod);
+                _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(shippingMethod);
+            ViewData["ParentCategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", category.ParentCategoryID);
+            return View(category);
         }
 
-        // GET: ShippingMethods/Edit/5
+        // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace ProjektSklep
                 return NotFound();
             }
 
-            var shippingMethod = await _context.ShippingMethods.FindAsync(id);
-            if (shippingMethod == null)
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
-            return View(shippingMethod);
+            ViewData["ParentCategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", category.ParentCategoryID);
+            return View(category);
         }
 
-        // POST: ShippingMethods/Edit/5
+        // POST: Categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ShippingMethodID,OrderID,Name")] ShippingMethod shippingMethod)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoryID,ParentCategoryID,Name,Visibility")] Category category)
         {
-            if (id != shippingMethod.ShippingMethodID)
+            if (id != category.CategoryID)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace ProjektSklep
             {
                 try
                 {
-                    _context.Update(shippingMethod);
+                    _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ShippingMethodExists(shippingMethod.ShippingMethodID))
+                    if (!CategoryExists(category.CategoryID))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace ProjektSklep
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(shippingMethod);
+            ViewData["ParentCategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", category.ParentCategoryID);
+            return View(category);
         }
 
-        // GET: ShippingMethods/Delete/5
+        // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace ProjektSklep
                 return NotFound();
             }
 
-            var shippingMethod = await _context.ShippingMethods
-                .FirstOrDefaultAsync(m => m.ShippingMethodID == id);
-            if (shippingMethod == null)
+            var category = await _context.Categories
+                .Include(c => c.Parent)
+                .FirstOrDefaultAsync(m => m.CategoryID == id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(shippingMethod);
+            return View(category);
         }
 
-        // POST: ShippingMethods/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var shippingMethod = await _context.ShippingMethods.FindAsync(id);
-            _context.ShippingMethods.Remove(shippingMethod);
+            var category = await _context.Categories.FindAsync(id);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ShippingMethodExists(int id)
+        private bool CategoryExists(int id)
         {
-            return _context.ShippingMethods.Any(e => e.ShippingMethodID == id);
+            return _context.Categories.Any(e => e.CategoryID == id);
         }
     }
 }

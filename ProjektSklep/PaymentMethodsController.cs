@@ -10,22 +10,22 @@ using ProjektSklep.Models;
 
 namespace ProjektSklep
 {
-    public class CategoriesController : Controller
+    public class PaymentMethodsController : Controller
     {
         private readonly ShopContext _context;
 
-        public CategoriesController(ShopContext context)
+        public PaymentMethodsController(ShopContext context)
         {
             _context = context;
         }
 
-        // GET: Categories
+        // GET: PaymentMethods
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categories.ToListAsync());
+            return View(await _context.PaymentMethods.ToListAsync());
         }
 
-        // GET: Categories/Details/5
+        // GET: PaymentMethods/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace ProjektSklep
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryID == id);
-            if (category == null)
+            var paymentMethod = await _context.PaymentMethods
+                .FirstOrDefaultAsync(m => m.PaymentMethodID == id);
+            if (paymentMethod == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(paymentMethod);
         }
 
-        // GET: Categories/Create
+        // GET: PaymentMethods/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: PaymentMethods/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryID,Name,Visibility")] Category category)
+        public async Task<IActionResult> Create([Bind("PaymentMethodID,Name")] PaymentMethod paymentMethod)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                _context.Add(paymentMethod);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(paymentMethod);
         }
 
-        // GET: Categories/Edit/5
+        // GET: PaymentMethods/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace ProjektSklep
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var paymentMethod = await _context.PaymentMethods.FindAsync(id);
+            if (paymentMethod == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(paymentMethod);
         }
 
-        // POST: Categories/Edit/5
+        // POST: PaymentMethods/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryID,Name,Visibility")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("PaymentMethodID,Name")] PaymentMethod paymentMethod)
         {
-            if (id != category.CategoryID)
+            if (id != paymentMethod.PaymentMethodID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace ProjektSklep
             {
                 try
                 {
-                    _context.Update(category);
+                    _context.Update(paymentMethod);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CategoryID))
+                    if (!PaymentMethodExists(paymentMethod.PaymentMethodID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace ProjektSklep
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(paymentMethod);
         }
 
-        // GET: Categories/Delete/5
+        // GET: PaymentMethods/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace ProjektSklep
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryID == id);
-            if (category == null)
+            var paymentMethod = await _context.PaymentMethods
+                .FirstOrDefaultAsync(m => m.PaymentMethodID == id);
+            if (paymentMethod == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(paymentMethod);
         }
 
-        // POST: Categories/Delete/5
+        // POST: PaymentMethods/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            _context.Categories.Remove(category);
+            var paymentMethod = await _context.PaymentMethods.FindAsync(id);
+            _context.PaymentMethods.Remove(paymentMethod);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool PaymentMethodExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryID == id);
+            return _context.PaymentMethods.Any(e => e.PaymentMethodID == id);
         }
     }
 }

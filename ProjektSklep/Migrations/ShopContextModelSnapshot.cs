@@ -15,7 +15,7 @@ namespace ProjektSklep.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -26,7 +26,7 @@ namespace ProjektSklep.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ApartmentNumber")
+                    b.Property<int?>("ApartmentNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Country")
@@ -85,10 +85,15 @@ namespace ProjektSklep.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ParentCategoryID")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Visibility")
                         .HasColumnType("bit");
 
                     b.HasKey("CategoryID");
+
+                    b.HasIndex("ParentCategoryID");
 
                     b.ToTable("Category");
                 });
@@ -245,9 +250,6 @@ namespace ProjektSklep.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderID")
-                        .HasColumnType("int");
-
                     b.HasKey("PaymentMethodID");
 
                     b.ToTable("PaymentMethod");
@@ -278,8 +280,8 @@ namespace ProjektSklep.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductDescription")
                         .HasColumnType("nvarchar(max)");
@@ -337,9 +339,6 @@ namespace ProjektSklep.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderID")
-                        .HasColumnType("int");
-
                     b.HasKey("ShippingMethodID");
 
                     b.ToTable("ShippingMethod");
@@ -352,6 +351,13 @@ namespace ProjektSklep.Migrations
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjektSklep.Models.Category", b =>
+                {
+                    b.HasOne("ProjektSklep.Models.Category", "Parent")
+                        .WithMany("Childern")
+                        .HasForeignKey("ParentCategoryID");
                 });
 
             modelBuilder.Entity("ProjektSklep.Models.Customer", b =>
@@ -378,13 +384,13 @@ namespace ProjektSklep.Migrations
                         .IsRequired();
 
                     b.HasOne("ProjektSklep.Models.PaymentMethod", "PaymentMethod")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("PaymentMethodID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProjektSklep.Models.ShippingMethod", "ShippingMethod")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ShippingMethodID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

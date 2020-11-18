@@ -28,7 +28,6 @@ namespace ProjektSklep.Models
         public State OrderStatus { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */
-        //public ICollection<Product> Products { get; set; }
         public Customer Customer { get; set; }
         public ShippingMethod ShippingMethod { get; set; }
         public PaymentMethod PaymentMethod { get; set; }

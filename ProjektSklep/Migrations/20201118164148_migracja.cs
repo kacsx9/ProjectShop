@@ -19,7 +19,7 @@ namespace ProjektSklep.Migrations
                     PostCode = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
                     HouseNumber = table.Column<int>(nullable: false),
-                    ApartmentNumber = table.Column<int>(nullable: false)
+                    ApartmentNumber = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,12 +32,19 @@ namespace ProjektSklep.Migrations
                 {
                     CategoryID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ParentCategoryID = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Visibility = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.CategoryID);
+                    table.ForeignKey(
+                        name: "FK_Category_Category_ParentCategoryID",
+                        column: x => x.ParentCategoryID,
+                        principalTable: "Category",
+                        principalColumn: "CategoryID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,7 +101,6 @@ namespace ProjektSklep.Migrations
                 {
                     PaymentMethodID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderID = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -108,7 +114,6 @@ namespace ProjektSklep.Migrations
                 {
                     ShippingMethodID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderID = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -130,7 +135,7 @@ namespace ProjektSklep.Migrations
                     DateAdded = table.Column<DateTime>(nullable: false),
                     Promotion = table.Column<bool>(nullable: false),
                     VAT = table.Column<int>(nullable: false),
-                    Price = table.Column<double>(nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Amount = table.Column<int>(nullable: false),
                     Visibility = table.Column<bool>(nullable: false),
                     SoldProducts = table.Column<int>(nullable: false)
@@ -269,6 +274,11 @@ namespace ProjektSklep.Migrations
                 name: "IX_Attachment_ProductID",
                 table: "Attachment",
                 column: "ProductID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Category_ParentCategoryID",
+                table: "Category",
+                column: "ParentCategoryID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customer_AddressID",

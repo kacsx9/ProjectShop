@@ -12,7 +12,6 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int PageConfigurationID { get; set; }
-        //[ForeignKey("Customer")]
         public int CustomerID { get; set; }
         public bool SendingNewsletter { get; set; }
         public bool ShowNetPrices { get; set; }
@@ -20,8 +19,5 @@ namespace ProjektSklep.Models
         public int InterfaceSkin { get; set; }
         public int Language { get; set; }
         public int Currency { get; set; }
-
-        /* POLA - ENTITY FRAMEWORK */
-        //public Customer Customer { get; set; }
     }
 }

@@ -38,15 +38,15 @@ namespace ProjektSklep.Controllers
             ViewBag.produkty.Add(p1);
             Product p2 = new Product();
             p2.Name = "Samochód2";
-            p2.Price = 2137.99;
+            p2.Price = 2137.99M;
             ViewBag.produkty.Add(p2);
             Product p3 = new Product();
             p3.Name = "Komputer";
-            p3.Price = 21378.99;
+            p3.Price = 21378.99M;
             ViewBag.produkty.Add(p3);
             Product p4 = new Product();
             p4.Name = "Samochód2";
-            p4.Price = 420.99;
+            p4.Price = 420.99M;
             ViewBag.produkty.Add(p4);
 
             ViewBag.kategorie = new List<Category>();

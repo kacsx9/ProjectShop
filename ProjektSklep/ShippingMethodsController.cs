@@ -10,22 +10,22 @@ using ProjektSklep.Models;
 
 namespace ProjektSklep
 {
-    public class PaymentMethodsController : Controller
+    public class ShippingMethodsController : Controller
     {
         private readonly ShopContext _context;
 
-        public PaymentMethodsController(ShopContext context)
+        public ShippingMethodsController(ShopContext context)
         {
             _context = context;
         }
 
-        // GET: PaymentMethods
+        // GET: ShippingMethods
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PaymentMethods.ToListAsync());
+            return View(await _context.ShippingMethods.ToListAsync());
         }
 
-        // GET: PaymentMethods/Details/5
+        // GET: ShippingMethods/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace ProjektSklep
                 return NotFound();
             }
 
-            var paymentMethod = await _context.PaymentMethods
-                .FirstOrDefaultAsync(m => m.PaymentMethodID == id);
-            if (paymentMethod == null)
+            var shippingMethod = await _context.ShippingMethods
+                .FirstOrDefaultAsync(m => m.ShippingMethodID == id);
+            if (shippingMethod == null)
             {
                 return NotFound();
             }
 
-            return View(paymentMethod);
+            return View(shippingMethod);
         }
 
-        // GET: PaymentMethods/Create
+        // GET: ShippingMethods/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PaymentMethods/Create
+        // POST: ShippingMethods/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PaymentMethodID,OrderID,Name")] PaymentMethod paymentMethod)
+        public async Task<IActionResult> Create([Bind("ShippingMethodID,Name")] ShippingMethod shippingMethod)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(paymentMethod);
+                _context.Add(shippingMethod);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(paymentMethod);
+            return View(shippingMethod);
         }
 
-        // GET: PaymentMethods/Edit/5
+        // GET: ShippingMethods/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace ProjektSklep
                 return NotFound();
             }
 
-            var paymentMethod = await _context.PaymentMethods.FindAsync(id);
-            if (paymentMethod == null)
+            var shippingMethod = await _context.ShippingMethods.FindAsync(id);
+            if (shippingMethod == null)
             {
                 return NotFound();
             }
-            return View(paymentMethod);
+            return View(shippingMethod);
         }
 
-        // POST: PaymentMethods/Edit/5
+        // POST: ShippingMethods/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PaymentMethodID,OrderID,Name")] PaymentMethod paymentMethod)
+        public async Task<IActionResult> Edit(int id, [Bind("ShippingMethodID,Name")] ShippingMethod shippingMethod)
         {
-            if (id != paymentMethod.PaymentMethodID)
+            if (id != shippingMethod.ShippingMethodID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace ProjektSklep
             {
                 try
                 {
-                    _context.Update(paymentMethod);
+                    _context.Update(shippingMethod);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PaymentMethodExists(paymentMethod.PaymentMethodID))
+                    if (!ShippingMethodExists(shippingMethod.ShippingMethodID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace ProjektSklep
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(paymentMethod);
+            return View(shippingMethod);
         }
 
-        // GET: PaymentMethods/Delete/5
+        // GET: ShippingMethods/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace ProjektSklep
                 return NotFound();
             }
 
-            var paymentMethod = await _context.PaymentMethods
-                .FirstOrDefaultAsync(m => m.PaymentMethodID == id);
-            if (paymentMethod == null)
+            var shippingMethod = await _context.ShippingMethods
+                .FirstOrDefaultAsync(m => m.ShippingMethodID == id);
+            if (shippingMethod == null)
             {
                 return NotFound();
             }
 
-            return View(paymentMethod);
+            return View(shippingMethod);
         }
 
-        // POST: PaymentMethods/Delete/5
+        // POST: ShippingMethods/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var paymentMethod = await _context.PaymentMethods.FindAsync(id);
-            _context.PaymentMethods.Remove(paymentMethod);
+            var shippingMethod = await _context.ShippingMethods.FindAsync(id);
+            _context.ShippingMethods.Remove(shippingMethod);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PaymentMethodExists(int id)
+        private bool ShippingMethodExists(int id)
         {
-            return _context.PaymentMethods.Any(e => e.PaymentMethodID == id);
+            return _context.ShippingMethods.Any(e => e.ShippingMethodID == id);
         }
     }
 }
