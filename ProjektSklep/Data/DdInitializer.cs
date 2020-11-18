@@ -79,11 +79,11 @@ namespace ProjektSklep.Data
             }
             var customers = new Customer[]
             {
-                new Customer{ AddressID=1, PageConfigurationId=1, FirstName="Bartłomiej", LastName="Umiński", Login="bartek", Password="uminski", Email="bartlomiejuminski1999@gmai.com", AdminRights=true },
-                new Customer{ AddressID=2, PageConfigurationId=2, FirstName="Kacper", LastName="Siegieńczuk", Login="kacper", Password="siegienczuk", Email="kacpersiegienczuk@gmai.com", AdminRights=true },
-                new Customer{ AddressID=3, PageConfigurationId=3, FirstName="Michał", LastName="Kozikowski", Login="michal", Password="kozikowski", Email="michalkozikowski@gmai.com", AdminRights=true },
-                new Customer{ AddressID=4, PageConfigurationId=4, FirstName="Jakub", LastName="Kozłowski", Login="jakub", Password="kozlowski", Email="jakubkozlowski@gmai.com", AdminRights=true },
-                new Customer{ AddressID=5, PageConfigurationId=5, FirstName="Klient", LastName="Klientowski", Login="klient", Password="klient", Email="klientklientowski@gmai.com", AdminRights=false }
+                new Customer{ AddressID=1, PageConfigurationID=1, FirstName="Bartłomiej", LastName="Umiński", Login="bartek", Password="uminski", Email="bartlomiejuminski1999@gmai.com", AdminRights=true },
+                new Customer{ AddressID=2, PageConfigurationID=2, FirstName="Kacper", LastName="Siegieńczuk", Login="kacper", Password="siegienczuk", Email="kacpersiegienczuk@gmai.com", AdminRights=true },
+                new Customer{ AddressID=3, PageConfigurationID=3, FirstName="Michał", LastName="Kozikowski", Login="michal", Password="kozikowski", Email="michalkozikowski@gmai.com", AdminRights=true },
+                new Customer{ AddressID=4, PageConfigurationID=4, FirstName="Jakub", LastName="Kozłowski", Login="jakub", Password="kozlowski", Email="jakubkozlowski@gmai.com", AdminRights=true },
+                new Customer{ AddressID=5, PageConfigurationID=5, FirstName="Klient", LastName="Klientowski", Login="klient", Password="klient", Email="klientklientowski@gmai.com", AdminRights=false }
             };
 
             foreach (Customer customer in customers)

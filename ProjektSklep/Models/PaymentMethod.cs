@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace ProjektSklep.Models
 {
+    [DisplayColumn("PaymentMethodID")]
     public class PaymentMethod
     {
         /* POLA */
         [Key]
         public int PaymentMethodID { get; set; }
+        //[Required]
         public string Name { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */

@@ -11,7 +11,9 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int DiscountCodeID { get; set; }
+        [Required]
         public string DiscoundCode { get; set; }
+        [Required]
         public int Percent { get; set; }
     }
 }

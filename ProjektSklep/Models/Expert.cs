@@ -6,13 +6,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjektSklep.Models
 {
+    [DisplayColumn("ExpertID")]
     public class Expert
     {
         /* POLA */
         [Key]
         public int ExpertID { get; set; }
+        //[Required]
         public string FirstName { get; set; }
+        //[Required]
         public string LastName { get; set; }
+        //[Required]
         public string Email { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */

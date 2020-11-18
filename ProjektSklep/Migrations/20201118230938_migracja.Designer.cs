@@ -10,7 +10,7 @@ using ProjektSklep.Data;
 namespace ProjektSklep.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20201118164148_migracja")]
+    [Migration("20201118230938_migracja")]
     partial class migracja
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,9 +62,11 @@ namespace ProjektSklep.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductID")
@@ -125,7 +127,7 @@ namespace ProjektSklep.Migrations
                     b.Property<string>("Login")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PageConfigurationId")
+                    b.Property<int>("PageConfigurationID")
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
@@ -135,7 +137,7 @@ namespace ProjektSklep.Migrations
 
                     b.HasIndex("AddressID");
 
-                    b.HasIndex("PageConfigurationId");
+                    b.HasIndex("PageConfigurationID");
 
                     b.ToTable("Customer");
                 });
@@ -148,6 +150,7 @@ namespace ProjektSklep.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DiscoundCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Percent")
@@ -372,7 +375,7 @@ namespace ProjektSklep.Migrations
 
                     b.HasOne("ProjektSklep.Models.PageConfiguration", "PageConfiguration")
                         .WithMany()
-                        .HasForeignKey("PageConfigurationId")
+                        .HasForeignKey("PageConfigurationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

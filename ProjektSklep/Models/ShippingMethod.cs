@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace ProjektSklep.Models
 {
+    [DisplayColumn("ShippingMethodID")]
     public class ShippingMethod
     {
         /* POLA */
         [Key]
         public int ShippingMethodID { get; set; }
+        //[Required]
         public string Name { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */

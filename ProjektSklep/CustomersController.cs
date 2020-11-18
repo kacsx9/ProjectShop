@@ -50,7 +50,7 @@ namespace ProjektSklep
         public IActionResult Create()
         {
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressID");
-            ViewData["PageConfigurationId"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID");
+            ViewData["PageConfigurationID"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace ProjektSklep
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerID,AddressID,PageConfigurationId,FirstName,LastName,Login,Password,Email,AdminRights")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerID,AddressID,PageConfigurationID,FirstName,LastName,Login,Password,Email,AdminRights")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace ProjektSklep
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressID", customer.AddressID);
-            ViewData["PageConfigurationId"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID", customer.PageConfigurationId);
+            ViewData["PageConfigurationID"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID", customer.PageConfigurationID);
             return View(customer);
         }
 
@@ -86,7 +86,7 @@ namespace ProjektSklep
                 return NotFound();
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressID", customer.AddressID);
-            ViewData["PageConfigurationId"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID", customer.PageConfigurationId);
+            ViewData["PageConfigurationID"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID", customer.PageConfigurationID);
             return View(customer);
         }
 
@@ -95,7 +95,7 @@ namespace ProjektSklep
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerID,AddressID,PageConfigurationId,FirstName,LastName,Login,Password,Email,AdminRights")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("CustomerID,AddressID,PageConfigurationID,FirstName,LastName,Login,Password,Email,AdminRights")] Customer customer)
         {
             if (id != customer.CustomerID)
             {
@@ -123,7 +123,7 @@ namespace ProjektSklep
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressID", customer.AddressID);
-            ViewData["PageConfigurationId"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID", customer.PageConfigurationId);
+            ViewData["PageConfigurationID"] = new SelectList(_context.PageConfigurations, "PageConfigurationID", "PageConfigurationID", customer.PageConfigurationID);
             return View(customer);
         }
 

@@ -53,7 +53,7 @@ namespace ProjektSklep.Migrations
                 {
                     DiscountCodeID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DiscoundCode = table.Column<string>(nullable: true),
+                    DiscoundCode = table.Column<string>(nullable: false),
                     Percent = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -164,7 +164,7 @@ namespace ProjektSklep.Migrations
                     CustomerID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddressID = table.Column<int>(nullable: false),
-                    PageConfigurationId = table.Column<int>(nullable: false),
+                    PageConfigurationID = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Login = table.Column<string>(nullable: true),
@@ -182,8 +182,8 @@ namespace ProjektSklep.Migrations
                         principalColumn: "AddressID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Customer_PageConfiguration_PageConfigurationId",
-                        column: x => x.PageConfigurationId,
+                        name: "FK_Customer_PageConfiguration_PageConfigurationID",
+                        column: x => x.PageConfigurationID,
                         principalTable: "PageConfiguration",
                         principalColumn: "PageConfigurationID",
                         onDelete: ReferentialAction.Cascade);
@@ -196,8 +196,8 @@ namespace ProjektSklep.Migrations
                     AttachmentID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductID = table.Column<int>(nullable: false),
-                    Path = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Path = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -286,9 +286,9 @@ namespace ProjektSklep.Migrations
                 column: "AddressID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_PageConfigurationId",
+                name: "IX_Customer_PageConfigurationID",
                 table: "Customer",
-                column: "PageConfigurationId");
+                column: "PageConfigurationID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_CustomerID",
