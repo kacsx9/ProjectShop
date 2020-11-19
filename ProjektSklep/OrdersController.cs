@@ -51,8 +51,8 @@ namespace ProjektSklep
         public IActionResult Create()
         {
             ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID");
-            ViewData["PaymentMethodID"] = new SelectList(_context.PaymentMethods, "PaymentMethodID", "PaymentMethodID");
-            ViewData["ShippingMethodID"] = new SelectList(_context.ShippingMethods, "ShippingMethodID", "ShippingMethodID");
+            ViewData["PaymentMethodID"] = new SelectList(_context.PaymentMethods, "PaymentMethodID", "Name");
+            ViewData["ShippingMethodID"] = new SelectList(_context.ShippingMethods, "ShippingMethodID", "Name");
             return View();
         }
 
