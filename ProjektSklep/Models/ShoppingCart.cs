@@ -8,10 +8,17 @@ namespace ProjektSklep.Models
     public class ShoppingCart
     {
         /* POLA */
-        public List<Product> Products { get; set; }
+        public List<ShoppingCartElement> ProductList { get; set; }
 
         /* METODY */
-        public bool AddProduct() { return true; }
-        public bool DeleteProduct() { return true; }
+
+        public bool AddProduct() 
+        { 
+            return true; 
+        }
+        public bool DeleteProduct() 
+        { 
+            return true; 
+        }
     }
 }

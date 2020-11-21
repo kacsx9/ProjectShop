@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "ShoppingCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @model ProjektSklep.Models.ShoppingCart
+}
+
+<h1>Koszyk</h1>
+
+<div class="list-group">
+    <ul>
+       @foreach (ShoppingCartElement element in Model.ProductList)
+        {
+        <li>
+            <p>Product name: @element.Product.Name</p>
+            <p>Product count: @element.Count</p>
+        </li>
+        }
+    </ul>
+</div>
+

@@ -54,6 +54,28 @@ namespace ProjektSklep.Controllers
             return View(homeViewModel);
         }
 
+        // Pobranie produktów danej kategorii
+        [HttpGet("Home/ShoppingCartAddProduct/{ProductID:int}")]
+        public IActionResult ShoppingCartAddProduct(int? ProductID)
+        {
+            if (ProductID == null)
+            {
+                return NotFound();
+            }
+
+            var cookie = Request.Cookies["ShoppingCart"];
+            if (cookie == null)
+            {
+                Response.Cookies.Append("ShoppingCart", ProductID.ToString());
+            }
+            else
+            {
+                Response.Cookies.Append("ShoppingCart", $"{cookie}-{ProductID}");
+            }
+
+            return Redirect("~/Home/Index");       // zmienic na poprzednią ścieżke
+        }
+
         public IActionResult Privacy()
         {
             return View();
