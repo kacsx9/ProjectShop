@@ -4,64 +4,54 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using ProjektSklep.Data;
 using ProjektSklep.Models;
+using ProjektSklep.Models.ViewModels;
 
 namespace ProjektSklep.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ShopContext _context;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ShopContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        //ostateczna metoda Index()
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //mockupowa metoda
+        // Wyświetlenie wszystkich produktów i kategorii
         public IActionResult Index()
         {
-            ViewBag.produkty = new List<Product>();
-            Product p = new Product();
-            p.Name = "Samochód";
-            p.Price = 50;
-            ViewBag.produkty.Add(p);
-            Product p1 = new Product();
-            p1.Name = "Samochód1";
-            p1.Price = 78000;
-            ViewBag.produkty.Add(p1);
-            Product p2 = new Product();
-            p2.Name = "Samochód2";
-            p2.Price = 2137.99M;
-            ViewBag.produkty.Add(p2);
-            Product p3 = new Product();
-            p3.Name = "Komputer";
-            p3.Price = 21378.99M;
-            ViewBag.produkty.Add(p3);
-            Product p4 = new Product();
-            p4.Name = "Samochód2";
-            p4.Price = 420.99M;
-            ViewBag.produkty.Add(p4);
+            var homeViewModel = new HomeViewModel();
+            homeViewModel.Products = _context.Products.Include(p => p.Category).Include(p => p.Expert);
+            homeViewModel.Categories = _context.Categories.Include(c => c.Parent);
+            return View(homeViewModel);
+        }
 
-            ViewBag.kategorie = new List<Category>();
-            Category c = new Category();
-            c.Name = "Komputery";
-            Category c1 = new Category();
-            c1.Name = "Samochody";
-            Category c2 = new Category();
-            c2.Name = "Ludzie";
+        // Pobranie produktów danej kategorii
+        [HttpGet("Home/Index/{CategoryID:int}")]
+        public IActionResult Index(int? CategoryID)
+        {
+            if (CategoryID == null)
+            {
+                return NotFound();
+            }
 
-            ViewBag.kategorie.Add(c);
-            ViewBag.kategorie.Add(c1);
-            ViewBag.kategorie.Add(c2);
+            var homeViewModel = new HomeViewModel();
+            homeViewModel.Products = _context.Products.Include(p => p.Category).Include(p => p.Expert).Where(p => p.Category.CategoryID == CategoryID);
+            homeViewModel.Categories = _context.Categories.Include(c => c.Parent);
 
-            return View();
+            if (homeViewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(homeViewModel);
         }
 
         public IActionResult Privacy()

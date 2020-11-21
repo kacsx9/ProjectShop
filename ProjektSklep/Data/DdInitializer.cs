@@ -194,10 +194,10 @@ namespace ProjektSklep.Data
             }
             var products = new Product[]
             {
-                new Product{ CategoryID=3, ExpertID=1, Name="Laptop LENOVO", ProductDescription="Dobry laptop", Image="scieżka do pliku", DateAdded=new DateTime(), Promotion=false, VAT=23, Price=4300, Amount=20, Visibility=true, SoldProducts=13 },
-                new Product{ CategoryID=2, ExpertID=1, Name="Smartfon HUAWEI P30", ProductDescription="Dobry smartfon", Image="scieżka do pliku", DateAdded=new DateTime(), Promotion=true, VAT=23, Price=2999, Amount=10, Visibility=true, SoldProducts=5 },
-                new Product{ CategoryID=3, ExpertID=1, Name="Laptop HUAWEI", ProductDescription="Dobry laptop", Image="scieżka do pliku", DateAdded=new DateTime(), Promotion=true, VAT=23, Price=5000, Amount=34, Visibility=true, SoldProducts=7 },
-                new Product{ CategoryID=3, ExpertID=1, Name="Laptop APPLE", ProductDescription="Dobry laptop", Image="scieżka do pliku", DateAdded=new DateTime(), Promotion=false, VAT=23, Price=4000, Amount=56, Visibility=true, SoldProducts=8 },
+                new Product{ CategoryID=2, ExpertID=1, Name="Laptop LENOVO", ProductDescription="Dobry laptop", Image="~/Content/Images/Products/Laptop LENOVO.jpg", DateAdded=new DateTime(), Promotion=false, VAT=23, Price=4300, Amount=20, Visibility=true, SoldProducts=13 },
+                new Product{ CategoryID=3, ExpertID=1, Name="Smartfon HUAWEI P30", ProductDescription="Dobry smartfon", Image="~/Content/Images/Products/Smartfon HUAWEI P30.jpg", DateAdded=new DateTime(), Promotion=true, VAT=23, Price=2999, Amount=10, Visibility=true, SoldProducts=5 },
+                new Product{ CategoryID=2, ExpertID=1, Name="Laptop HUAWEI", ProductDescription="Dobry laptop", Image="~/Content/Images/Products/Laptop HUAWEI.png", DateAdded=new DateTime(), Promotion=true, VAT=23, Price=5000, Amount=34, Visibility=true, SoldProducts=7 },
+                new Product{ CategoryID=2, ExpertID=1, Name="Laptop APPLE", ProductDescription="Dobry laptop", Image="~/Content/Images/Products/Laptop APPLE.jpg", DateAdded=new DateTime(), Promotion=false, VAT=23, Price=4000, Amount=56, Visibility=true, SoldProducts=8 },
             };
 
             foreach (Product product in products)

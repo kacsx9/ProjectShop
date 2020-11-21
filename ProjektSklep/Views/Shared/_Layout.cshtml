@@ -28,75 +28,23 @@
                 <nav class="navbar navbar-light bg-light">
                     <button class="btn btn-secondary" type="button"> Ustawienia </button> &nbsp;
                    
-                    @*</nav>
-        <nav class="navbar navbar-light bg-light">*@
                     <button class="btn btn-secondary" type="button"> Zaloguj się </button>
                 </nav>
             </div>
         </nav>
     </div>
     <div class="container-fluid">
-        <div class="row" >
-            <nav id="nav-sidebar" class="bg-faded" >
-                @*<div class="sidebar-header hidden-sm-down">
-                    <h2>Kategorie</h2>
-                    <hr />
-                </div>*@
-                <div class="sidebar-content hidden-sm-down">
-                    <ul class="list-group list-group-flush" id="categories">
-                        @*@RenderSection("Categories", required: true);*@
-                    </ul>
-                </div>
-
-                <!-- CRUD --> 
-                <div class="sidebar-content hidden-sm-down">
-                    <ul>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DiscountCodes" asp-action="Index">DiscountCodes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Addresses" asp-action="Index">Addresses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PageConfigurations" asp-action="Index">PageConfigurations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ShippingMethods" asp-action="Index">ShippingMethods</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PaymentMethods" asp-action="Index">PaymentMethods</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Attachments" asp-action="Index">Attachments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Experts" asp-action="Index">Experts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ProductOrders" asp-action="Index">ProductOrders</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </nav>
+        <div class="row">
+            @RenderSection("Categories", required: false)
             <div class="container">
                 <main role="main" class="pb-3">
                     @RenderBody()
                 </main>
             </div>
         </div>
+
+        @*@await Html.PartialAsync("_AdminPanel")*@
+
         <footer class="border-top footer text-muted">
             <div class="container">
                 &copy; 2020 - ProjektSklep - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
