@@ -7,15 +7,46 @@
 
 <h1>Koszyk</h1>
 
-<div class="list-group">
-    <ul>
-       @foreach (ShoppingCartElement element in Model.ProductList)
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductList.ElementAt(0).Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductList.ElementAt(0).Product.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductList.ElementAt(0).Count)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductList.ElementAt(0).Sum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ProductList)
         {
-        <li>
-            <p>Product name: @element.Product.Name</p>
-            <p>Product count: @element.Count</p>
-        </li>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                <img src="@Url.Content(item.Product.Image)" style="height: 100px; width: 150px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @item.Sum
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Index" asp-route-ProductID="@item.Product.ProductID">Delete</a>
+            </td>
+        </tr>
         }
-    </ul>
-</div>
+    </tbody>
+</table>
 
+<h2>Razem do zapłaty: @Model.CartPrice</h2>

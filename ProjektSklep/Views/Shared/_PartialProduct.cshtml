@@ -8,7 +8,7 @@
             <h5 class="mb-1">@Model.Name</h5>
             <small>@Model.Price PLN</small>
         </div>
-        <a class="bg-success text-dark" asp-action="ShoppingCartAddProduct" asp-route-ProductId="@Model.ProductID">Add To Cart</a>
+        <a class="btn btn-success" asp-action="ShoppingCartAddProduct" asp-route-ProductId="@Model.ProductID">Add To Cart</a>
         <p class="mb-1">@Model.ProductDescription</p>
         <small>Kategoria: @Model.Category.Name</small>
     </div>

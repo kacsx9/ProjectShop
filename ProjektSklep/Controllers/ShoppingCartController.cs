@@ -26,6 +26,12 @@ namespace ProjektSklep.Controllers
 
         public IActionResult Index()
         {
+            _shoppingCart = CreateCart();
+            return View(_shoppingCart);
+        }
+
+        private ShoppingCart CreateCart()
+        {
             _shoppingCart = new ShoppingCart();
             _shoppingCart.ProductList = new List<ShoppingCartElement>();
             List<Product> products = _context.Products.Include(p => p.Category).Include(p => p.Expert).ToList();
@@ -52,17 +58,63 @@ namespace ProjektSklep.Controllers
                             var product = _shoppingCart.ProductList.Find(x => x.Product.ProductID == id);
                             if (product != null)
                             {
-                                _shoppingCart.ProductList.Find(x => x.Product.ProductID == id).Count++;
+                                product.Count++;
+                                product.Sum += elem.Price;
                             }
                             else
                             {
-                                _shoppingCart.ProductList.Add(new ShoppingCartElement { Product = elem, Count = 1 });
+                                _shoppingCart.ProductList.Add(new ShoppingCartElement { Product = elem, Count = 1, Sum = elem.Price });
                             }
                         }
                     }
                 }
             }
+            return _shoppingCart;
+        }
+
+        [HttpGet("ShoppingCart/Index/{ProductID:int}")]
+        public IActionResult Index(int? ProductID)
+        {
+            if (ProductID == null)
+            {
+                return NotFound();
+            }
+
+            _shoppingCart = CreateCart();
+            var toRemove = _shoppingCart.ProductList.Find(x => x.Product.ProductID == ProductID);
+
+            if(toRemove != null)
+            {
+                if (toRemove.Count > 1)
+                {
+                    toRemove.Count--;
+                    toRemove.Sum -= toRemove.Product.Price;
+                }
+                else if (toRemove.Count == 1)
+                {
+                    toRemove.Count--;
+                    toRemove.Sum -= toRemove.Product.Price;
+                    _shoppingCart.ProductList.Remove(toRemove);
+                }
+            }
+
+            UpdateCookies();
             return View(_shoppingCart);
+        }
+
+        public void UpdateCookies()
+        {
+            string cookiesvalue = "";
+
+            foreach (var p in _shoppingCart.ProductList)
+            {
+                for (int i = 0; i < p.Count; i++)
+                {
+                    cookiesvalue += $"-{p.Product.ProductID}";
+                }
+            }
+
+            Response.Cookies.Append("ShoppingCart", cookiesvalue);
         }
     }
 }
