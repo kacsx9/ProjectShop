@@ -102,6 +102,13 @@ namespace ProjektSklep.Controllers
             return View(_shoppingCart);
         }
 
+        [HttpGet("ShoppingCart/OrderCompleted")]
+        public IActionResult OrderCompleted()
+        {
+            _shoppingCart = CreateCart();
+            return View(_shoppingCart);
+        }
+
         public void UpdateCookies()
         {
             string cookiesvalue = "";
