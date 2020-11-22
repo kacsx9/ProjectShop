@@ -6,22 +6,30 @@
 }
 
 <div class="list-group">
-    @foreach (Product p in ViewBag.produkty)
+    @foreach (Product p in Model.Products)
     {
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div>OBRAZEK</div>
-            <div style="float:right; width:80%;">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">@p.Name</h5>
-                    <small>@p.Price PLN</small>
-                </div>
-                <p class="mb-1">Przykładowy krótki opis produktu lub jakieś inne pierdoły, które będą dodane z bazy danych.</p>
-                <small>Kategoria / Autor wpisu</small>
-            </div>
-            <div style="clear:both; font-size:1px;"></div>
-        </a>
+        @await Html.PartialAsync("_PartialProduct", p)
     }
 </div>
+
+@section Categories {
+    <nav id="nav-sidebar" class="bg-faded">
+        <div class="sidebar-header hidden-sm-down">
+            <h2>Kategorie</h2>
+            <hr />
+        </div>
+        <div class="sidebar-content hidden-sm-down">
+            <ul>
+                @foreach (Category c in Model.Categories)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-action="Index" asp-route-CategoryId="@c.CategoryID">@c.Name</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+}
 
 <!--Kod do obslugi zalacznikow-->
 <h2>Jakis basicowy file upload</h2>
@@ -42,14 +50,3 @@
 
 
 
-
-@*@section Categories{*@
-
-@*@foreach (Category c in ViewBag.kategorie) *@
-<!--
-{
- <button type="button" class="list-group-item list-group-item-action" id="category">@*@c.Name*@</button>
-}
-
-}
--->
