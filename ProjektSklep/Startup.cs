@@ -47,12 +47,14 @@ namespace ProjektSklep
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles(/*new StaticFileOptions                // ¯eby dzia³a³y obrazki
+
+            app.UseStaticFiles();                                   // wwwroot css, JavaScrip, and images don't require authentication.
+            app.UseStaticFiles(new StaticFileOptions                // ¯eby dzia³a³y obrazki
             {
                 FileProvider = new PhysicalFileProvider(
                 Path.Combine(Directory.GetCurrentDirectory(), @"Content")),
                 RequestPath = "/Content"
-            }*/);
+            });
 
             app.UseRouting();
 
