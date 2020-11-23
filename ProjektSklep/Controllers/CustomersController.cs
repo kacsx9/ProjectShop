@@ -18,6 +18,16 @@ namespace ProjektSklep
         {
             _context = context;
         }
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult Verify(Customer acc)
+        {
+            //List<Customer> indentification = _context.Customers.FromSqlRaw("SELECT * FROM Customers WHERE Login='" + acc.Login + "' AND Password='" + acc.Password + "' ").ToList();
+            return View();
+        }
 
         // GET: Customers
         public async Task<IActionResult> Index()
