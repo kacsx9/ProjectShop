@@ -137,11 +137,11 @@ namespace ProjektSklep.Data
             }
             var orders = new Order[]
             {
-                new Order{ CustomerID=1, ShippingMethodID=1, PaymentMethodID=3, OrderStatus=ProjektSklep.Models.State.Preparing },
-                new Order{ CustomerID=2, ShippingMethodID=2, PaymentMethodID=4, OrderStatus=ProjektSklep.Models.State.OnTheWay },
-                new Order{ CustomerID=3, ShippingMethodID=2, PaymentMethodID=2, OrderStatus=ProjektSklep.Models.State.Delivered },
-                new Order{ CustomerID=4, ShippingMethodID=3, PaymentMethodID=1, OrderStatus=ProjektSklep.Models.State.Delivered },
-                new Order{ CustomerID=5, ShippingMethodID=4, PaymentMethodID=4, OrderStatus=ProjektSklep.Models.State.OnTheWay }
+                new Order{ CustomerID=1, ShippingMethodID=1, PaymentMethodID=3, OrderStatus=State.Preparing },
+                new Order{ CustomerID=2, ShippingMethodID=2, PaymentMethodID=4, OrderStatus=State.OnTheWay },
+                new Order{ CustomerID=3, ShippingMethodID=2, PaymentMethodID=2, OrderStatus=State.Delivered },
+                new Order{ CustomerID=4, ShippingMethodID=3, PaymentMethodID=1, OrderStatus=State.Delivered },
+                new Order{ CustomerID=5, ShippingMethodID=4, PaymentMethodID=4, OrderStatus=State.OnTheWay }
             };
 
             foreach (Order order in orders)

@@ -50,9 +50,10 @@ namespace ProjektSklep
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID");
+            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "Email");
             ViewData["PaymentMethodID"] = new SelectList(_context.PaymentMethods, "PaymentMethodID", "Name");
             ViewData["ShippingMethodID"] = new SelectList(_context.ShippingMethods, "ShippingMethodID", "Name");
+            ViewData["OrderStatus"] = new SelectList(Enum.GetValues(typeof(State)).Cast<State>());
             return View();
         }
 
@@ -88,9 +89,10 @@ namespace ProjektSklep
             {
                 return NotFound();
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "CustomerID", order.CustomerID);
-            ViewData["PaymentMethodID"] = new SelectList(_context.PaymentMethods, "PaymentMethodID", "PaymentMethodID", order.PaymentMethodID);
-            ViewData["ShippingMethodID"] = new SelectList(_context.ShippingMethods, "ShippingMethodID", "ShippingMethodID", order.ShippingMethodID);
+            ViewData["CustomerID"] = new SelectList(_context.Customers, "CustomerID", "Email", order.CustomerID);
+            ViewData["PaymentMethodID"] = new SelectList(_context.PaymentMethods, "PaymentMethodID", "Name", order.PaymentMethodID);
+            ViewData["ShippingMethodID"] = new SelectList(_context.ShippingMethods, "ShippingMethodID", "Name", order.ShippingMethodID);
+            ViewData["OrderStatus"] = new SelectList(Enum.GetValues(typeof(State)).Cast<State>());
             return View(order);
         }
 
