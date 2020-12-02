@@ -25,6 +25,8 @@ namespace ProjektSklep.Controllers
         }
 
         // Wyświetlenie wszystkich produktów i kategorii
+        [HttpGet("")]
+        [HttpGet("Home/Index")]
         public IActionResult Index()
         {
             var homeViewModel = new HomeViewModel();

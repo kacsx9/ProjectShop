@@ -3,6 +3,7 @@
 }
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    @model ProjektSklep.Models.ViewModels.HomeViewModel;
 }
 
 <div class="list-group">
@@ -30,23 +31,6 @@
         </div>
     </nav>
 }
-
-<!--Kod do obslugi zalacznikow-->
-<h2>Jakis basicowy file upload</h2>
-<form method="post" enctype="multipart/form-data" asp-controller="FileUpload" asp-action="Index">
-    <div class="form-group">
-        <div class="col-md-10">
-            <p>Wybierz 1 lub wiecej plikow:</p>
-            <input type="file" name="files" multiple />
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" value="Upload" /><br />
-            @ViewData["ExtensionWarning"]
-        </div>
-    </div>
-</form>
 
 
 

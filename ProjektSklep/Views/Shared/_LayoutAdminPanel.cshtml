@@ -11,7 +11,7 @@
     <div class="page-header">
         <nav class="navbar navbar-light bg-light">
             <div class="float_left">
-                <a href="/Home/Index">
+                <a asp-controller="Home" asp-action="Index">
                     <img src="@Url.Content("~/Content/Images/Logo/shop-logo.png")" style="height: 100px; width: 100px;" />
                 </a>
             </div>
@@ -38,8 +38,35 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            @RenderSection("Categories", required: false)
-            <div class="container">
+            <nav id="nav-sidebar" class="bg-faded">
+                <div class="sidebar-header hidden-sm-down">
+                    <h2>Baza danych:</h2>
+                    <hr />
+                </div>
+                <div class="sidebar-content hidden-sm-down">
+                    <ul>
+                        @await Html.PartialAsync("_AdminPanel")
+                    </ul>
+
+                    <!--Kod do obslugi zalacznikow-->
+                    <h2>File uploader</h2>
+                    <form method="post" enctype="multipart/form-data" asp-controller="FileUpload" asp-action="Index">
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <p>Wybierz 1 lub wiecej plikow:</p>
+                                <input type="file" name="files" multiple />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input type="submit" value="Upload" /><br />
+                                @ViewData["ExtensionWarning"]
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+            <div class="container" style="margin: 0px 0px; margin-left: 10px;">
                 <main role="main" class="pb-3">
                     @RenderBody()
                 </main>
