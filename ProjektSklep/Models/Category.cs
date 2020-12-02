@@ -14,7 +14,7 @@ namespace ProjektSklep.Models
         [Key]
         public int CategoryID { get; set; }
         public int? ParentCategoryID { get; set; }
-        //[Required]
+        [Required]
         public string Name { get; set; }
         [Required]
         public bool Visibility { get; set; }

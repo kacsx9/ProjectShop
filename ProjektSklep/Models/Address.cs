@@ -15,13 +15,13 @@ namespace ProjektSklep.Models
         public int AddressID { get; set; }
         [Required]
         public int CustomerID { get; set; }
-        //[Required]
+        [Required]
         public string Country { get; set; }
-        //[Required]
+        [Required]
         public string Town { get; set; }
-        //[Required]
+        [Required]
         public string PostCode { get; set; }
-        //[Required]
+        [Required]
         public string Street { get; set; }
         [Required]
         public int HouseNumber { get; set; }

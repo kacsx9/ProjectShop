@@ -19,11 +19,11 @@ namespace ProjektSklep.Models
         [Required]
         [ForeignKey("Expert")]
         public int ExpertID { get; set; }
-        //[Required]
+        [Required]
         public string Name { get; set; }
-        //[Required]
+        [Required]
         public string ProductDescription { get; set; }
-        //[Required]
+        [Required]
         public string Image { get; set; }
         [Required]
         [DataType(DataType.Date)]

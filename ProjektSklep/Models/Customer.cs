@@ -19,15 +19,15 @@ namespace ProjektSklep.Models
         [Required]
         [ForeignKey("PageConfiguration")]
         public int PageConfigurationID { get; set; }
-        //[Required]
+        [Required]
         public string FirstName { get; set; }
-        //[Required]
+        [Required]
         public string LastName { get; set; }
-        //[Required]
+        [Required]
         public string Login { get; set; }
-        //[Required]
+        [Required]
         public string Password { get; set; }
-        //[Required]
+        [Required]
         public string Email { get; set; }
         [Required]
         public bool AdminRights { get; set; }

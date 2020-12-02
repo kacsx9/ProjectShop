@@ -13,7 +13,7 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int PaymentMethodID { get; set; }
-        //[Required]
+        [Required]
         public string Name { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */

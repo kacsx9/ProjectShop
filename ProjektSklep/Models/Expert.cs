@@ -12,11 +12,11 @@ namespace ProjektSklep.Models
         /* POLA */
         [Key]
         public int ExpertID { get; set; }
-        //[Required]
+        [Required]
         public string FirstName { get; set; }
-        //[Required]
+        [Required]
         public string LastName { get; set; }
-        //[Required]
+        [Required]
         public string Email { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */
