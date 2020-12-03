@@ -91,6 +91,15 @@ namespace ProjektSklep.Controllers
                 return NotFound();
             }
 
+            using (var context = new ShopContext())
+            {
+                var paymentMethods = context.PaymentMethods.ToList();
+                var shippingMethods = context.ShippingMethods.ToList();
+
+                ViewData["PaymentMethods"] = new SelectList(paymentMethods, "PaymentMethodID", "Name");
+                ViewData["ShippingMethods"] = new SelectList(shippingMethods, "ShippingMethodID", "Name");
+            }
+
             _shoppingCart = CreateCart();
             var toRemove = _shoppingCart.ProductList.Find(x => x.Product.ProductID == ProductID);
 
@@ -138,47 +147,50 @@ namespace ProjektSklep.Controllers
 
             if (ModelState.IsValid)
             {
-                using (var context = new ShopContext())
+                if(ShoppingCart.ProductList.Count != 0)
                 {
-                    var order = new Order
+                    using (var context = new ShopContext())
                     {
-                        OrderStatus = State.Preparing,
-                        PaymentMethodID = ShoppingCart.PaymentMethodID,
-                        ShippingMethodID = ShoppingCart.ShippingMethodID,
-                        CustomerID = 1                                                      // zmienić customera na tego zalogowanego
-                    };
-                    context.Orders.Add(order);
-                    context.SaveChanges();              // dodanie OrderID przez EFCORE
-
-                    foreach (var product in ShoppingCart.ProductList)
-                    {
-                        for (int i = 0; i < product.Count; i++)
+                        var order = new Order
                         {
-                            var productOrder = new ProductOrder { OrderID = order.OrderID, ProductID = product.Product.ProductID };
-                            context.ProductOrders.Add(productOrder);
+                            OrderStatus = State.Preparing,
+                            PaymentMethodID = ShoppingCart.PaymentMethodID,
+                            ShippingMethodID = ShoppingCart.ShippingMethodID,
+                            CustomerID = 1                                                      // zmienić customera na tego zalogowanego
+                        };
+                        context.Orders.Add(order);
+                        context.SaveChanges();              // dodanie OrderID przez EFCORE
+
+                        foreach (var product in ShoppingCart.ProductList)
+                        {
+                            for (int i = 0; i < product.Count; i++)
+                            {
+                                var productOrder = new ProductOrder { OrderID = order.OrderID, ProductID = product.Product.ProductID };
+                                context.ProductOrders.Add(productOrder);
+                            }
                         }
-                    }
-                    context.SaveChanges();
+                        context.SaveChanges();
 
-                    var shippingMethod = context.ShippingMethods.Where(x => x.ShippingMethodID == ShoppingCart.ShippingMethodID).FirstOrDefault();
-                    var paymentMethod = context.PaymentMethods.Where(x => x.PaymentMethodID == ShoppingCart.PaymentMethodID).FirstOrDefault();
-                    var discountCode = context.DiscountCodes.Where(x => x.DiscoundCode == ShoppingCart.DiscountCode).FirstOrDefault();
+                        var shippingMethod = context.ShippingMethods.Where(x => x.ShippingMethodID == ShoppingCart.ShippingMethodID).FirstOrDefault();
+                        var paymentMethod = context.PaymentMethods.Where(x => x.PaymentMethodID == ShoppingCart.PaymentMethodID).FirstOrDefault();
+                        var discountCode = context.DiscountCodes.Where(x => x.DiscoundCode == ShoppingCart.DiscountCode).FirstOrDefault();
 
-                    ViewData["CenaBezRabatu"] = ShoppingCart.CartPrice;
+                        ViewData["CenaBezRabatu"] = ShoppingCart.CartPrice;
 
-                    if (shippingMethod != null)
-                        ViewData["ShippingMethod"] = shippingMethod.Name;
-                    if (paymentMethod != null)
-                        ViewData["PaymentMethod"] = paymentMethod.Name;
-                    if (discountCode != null)
-                        { 
+                        if (shippingMethod != null)
+                            ViewData["ShippingMethod"] = shippingMethod.Name;
+                        if (paymentMethod != null)
+                            ViewData["PaymentMethod"] = paymentMethod.Name;
+                        if (discountCode != null)
+                        {
                             ViewData["DiscountCode"] = discountCode.Percent;
                             decimal newPrice = ShoppingCart.CartPrice - (ShoppingCart.CartPrice * discountCode.Percent / 100);
                             ShoppingCart.CartPrice = newPrice;
                         }
-                    else
-                    {
-                        ViewData["DiscountCode"] = 0;
+                        else
+                        {
+                            ViewData["DiscountCode"] = 0;
+                        }
                     }
                 }
             }
