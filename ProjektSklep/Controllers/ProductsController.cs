@@ -49,7 +49,8 @@ namespace ProjektSklep
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID");
+            //ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID");
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "Name", "Name");
             ViewData["ExpertID"] = new SelectList(_context.Experts, "ExpertID", "ExpertID");
             return View();
         }
