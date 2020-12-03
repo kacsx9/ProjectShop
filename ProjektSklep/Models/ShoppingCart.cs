@@ -8,24 +8,23 @@ namespace ProjektSklep.Models
     public class ShoppingCart
     {
         /* POLA */
+        public int PaymentMethodID { get; set; }
+        public int ShippingMethodID { get; set; }
+        public string DiscountCode { get; set; }
         public List<ShoppingCartElement> ProductList { get; set; }
-        private decimal _cartPrice;
-        public decimal CartPrice
+        public decimal CartPrice { get; set; }
+
+        public decimal countCartPrice()
         {
-            get
+            decimal sum = 0M;
+            if (ProductList != null)
             {
-                decimal sum = 0M;
                 foreach (var product in ProductList)
                 {
                     sum += product.Sum;
                 }
-                return sum;
-
-            } set
-            {
-                _cartPrice = value;
             }
-
+            return sum;
         }
 
         /* METODY */

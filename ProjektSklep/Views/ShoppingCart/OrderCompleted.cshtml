@@ -51,5 +51,9 @@ else
         </tbody>
     </table>
 
-    <h2>Razem do zapłaty: @Model.CartPrice</h2>
+    <h3>Sposób wysyłki: @ViewBag.ShippingMethod</h3>
+    <h3>Sposób płatności: @ViewBag.PaymentMethod</h3>
+    <h3>Rabat: @ViewBag.DiscountCode%</h3>
+    <h3>Razem do zapłaty (przed rabatem): @ViewBag.CenaBezRabatu</h3>
+    <h3>Razem do zapłaty: @Model.CartPrice</h3>
 }

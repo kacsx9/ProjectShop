@@ -5,6 +5,10 @@ namespace ProjektSklep.Data
 {
     public class ShopContext : DbContext
     {
+        public ShopContext()
+        {
+        }
+
         public ShopContext(DbContextOptions<ShopContext> options) : base(options)
         {
 
@@ -23,6 +27,12 @@ namespace ProjektSklep.Data
         public DbSet<Expert> Experts { get; set; }
         public DbSet<ProductOrder> ProductOrders { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=NowaBazaDanychSklepu;Trusted_Connection=True;");
+
+            base.OnConfiguring(optionsBuilder);
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DiscountCode>().ToTable("DiscountCode");
