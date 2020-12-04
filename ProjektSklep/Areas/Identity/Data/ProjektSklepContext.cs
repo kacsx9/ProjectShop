@@ -1,15 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProjektSklep.Models;
 
 namespace ProjektSklep.Data
 {
-    public class ShopContext : DbContext
+    public class ProjektSklepContext : IdentityDbContext<IdentityUser>
     {
-        public ShopContext()
+        public ProjektSklepContext(DbContextOptions<ProjektSklepContext> options)
+            : base(options)
         {
+
         }
 
-        public ShopContext(DbContextOptions<ShopContext> options) : base(options)
+        public ProjektSklepContext()
         {
 
         }
@@ -29,12 +37,15 @@ namespace ProjektSklep.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=NowaBazaDanychSklepu;Trusted_Connection=True;");
-
+            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=ProjektSklep;Trusted_Connection=True;");
             base.OnConfiguring(optionsBuilder);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            // Customize the ASP.NET Identity model and override the defaults if needed.
+            // For example, you can rename the ASP.NET Identity table names and more.
+            // Add your customizations after calling base.OnModelCreating(builder);
             modelBuilder.Entity<DiscountCode>().ToTable("DiscountCode");
             modelBuilder.Entity<Address>().ToTable("Address");
             modelBuilder.Entity<Customer>().ToTable("Customer");

@@ -8,7 +8,7 @@ namespace ProjektSklep.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(ShopContext context)
+        public static void Initialize(ProjektSklepContext context)
         {
             context.Database.EnsureCreated();
 

@@ -31,7 +31,10 @@
                     <a class="btn btn-secondary" asp-controller="ShoppingCart" asp-action="Index">Koszyk</a> &nbsp;
                     <a class="btn btn-secondary" asp-controller="AdminPanel" asp-action="Index">Admin Panel</a> &nbsp;
                     <button class="btn btn-secondary" type="button"> Ustawienia </button> &nbsp;
-                    <a class="btn btn-secondary" asp-controller="Customers" asp-action="Login"> Zaloguj się </a>
+                    @*<a class="btn btn-secondary" asp-controller="Customers" asp-action="Login"> Zaloguj się </a>*@
+                    @*@await Html.PartialAsync("_LoginPartial")*@
+                    <a class="btn btn-secondary" id="login" asp-area="Identity" asp-page="/Account/Login">Zaloguj się</a>
+                    @* Przycisk generuje link do poprawnego miejsca do logowania (widoczny link w pasku adresu), ale nie przekierowuje na strone logowania, chuj wie czemu w sumie xD *@
                 </nav>
             </div>
         </nav>

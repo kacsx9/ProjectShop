@@ -12,9 +12,9 @@ namespace ProjektSklep
 {
     public class ShippingMethodsController : Controller
     {
-        private readonly ShopContext _context;
+        private readonly ProjektSklepContext _context;
 
-        public ShippingMethodsController(ShopContext context)
+        public ShippingMethodsController(ProjektSklepContext context)
         {
             _context = context;
         }

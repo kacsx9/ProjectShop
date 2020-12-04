@@ -12,9 +12,9 @@ namespace ProjektSklep
 {
     public class AddressesController : Controller
     {
-        private readonly ShopContext _context;
+        private readonly ProjektSklepContext _context;
 
-        public AddressesController(ShopContext context)
+        public AddressesController(ProjektSklepContext context)
         {
             _context = context;
         }

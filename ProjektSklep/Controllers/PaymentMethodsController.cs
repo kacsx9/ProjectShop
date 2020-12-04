@@ -12,9 +12,9 @@ namespace ProjektSklep
 {
     public class PaymentMethodsController : Controller
     {
-        private readonly ShopContext _context;
+        private readonly ProjektSklepContext _context;
 
-        public PaymentMethodsController(ShopContext context)
+        public PaymentMethodsController(ProjektSklepContext context)
         {
             _context = context;
         }

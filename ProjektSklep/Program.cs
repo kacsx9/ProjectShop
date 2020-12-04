@@ -25,7 +25,7 @@ namespace ProjektSklep
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<ShopContext>();
+                    var context = services.GetRequiredService<ProjektSklepContext>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)

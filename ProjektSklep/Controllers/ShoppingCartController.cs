@@ -16,11 +16,11 @@ namespace ProjektSklep.Controllers
     {
         private ShoppingCart _shoppingCart;
 
-        private readonly ShopContext _context;
+        private readonly ProjektSklepContext _context;
 
         private readonly ILogger<HomeController> _logger;
 
-        public ShoppingCartController(ILogger<HomeController> logger, ShopContext context)
+        public ShoppingCartController(ILogger<HomeController> logger, ProjektSklepContext context)
         {
             _logger = logger;
             _context = context;
@@ -28,7 +28,7 @@ namespace ProjektSklep.Controllers
 
         public IActionResult Index()
         {
-            using (var context = new ShopContext())
+            using (var context = new ProjektSklepContext())
             {
                 var paymentMethods = context.PaymentMethods.ToList();
                 var shippingMethods = context.ShippingMethods.ToList();
@@ -91,7 +91,7 @@ namespace ProjektSklep.Controllers
                 return NotFound();
             }
 
-            using (var context = new ShopContext())
+            using (var context = new ProjektSklepContext())
             {
                 var paymentMethods = context.PaymentMethods.ToList();
                 var shippingMethods = context.ShippingMethods.ToList();
@@ -149,7 +149,7 @@ namespace ProjektSklep.Controllers
             {
                 if(ShoppingCart.ProductList.Count != 0)
                 {
-                    using (var context = new ShopContext())
+                    using (var context = new ProjektSklepContext())
                     {
                         var order = new Order
                         {

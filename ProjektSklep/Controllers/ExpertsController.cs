@@ -12,9 +12,9 @@ namespace ProjektSklep
 {
     public class ExpertsController : Controller
     {
-        private readonly ShopContext _context;
+        private readonly ProjektSklepContext _context;
 
-        public ExpertsController(ShopContext context)
+        public ExpertsController(ProjektSklepContext context)
         {
             _context = context;
         }

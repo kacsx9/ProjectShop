@@ -14,11 +14,11 @@ namespace ProjektSklep.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ShopContext _context;
+        private readonly ProjektSklepContext _context;
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, ShopContext context)
+        public HomeController(ILogger<HomeController> logger, ProjektSklepContext context)
         {
             _logger = logger;
             _context = context;

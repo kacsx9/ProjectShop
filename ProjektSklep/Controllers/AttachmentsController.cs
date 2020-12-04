@@ -12,9 +12,9 @@ namespace ProjektSklep
 {
     public class AttachmentsController : Controller
     {
-        private readonly ShopContext _context;
+        private readonly ProjektSklepContext _context;
 
-        public AttachmentsController(ShopContext context)
+        public AttachmentsController(ProjektSklepContext context)
         {
             _context = context;
         }
